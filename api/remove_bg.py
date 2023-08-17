@@ -28,4 +28,4 @@ def remove_background(image_path, output_path):
     cv2.imwrite(output_path, img)
 
 # 使用例
-remove_background('input_image.jpg', 'output_no_bg.png')
+remove_background('saved_image.jpg', 'output_no_bg.png')
