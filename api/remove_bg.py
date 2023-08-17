@@ -1,45 +1,31 @@
-import torch
-import torchvision.transforms as transforms
-from PIL import Image
+import cv2
+import numpy as np
 
-# U-2-Netモデルの定義
-from u2net_model import U2NET # あなたはこのモデルを正しくインポートする必要があります。
+def remove_background(image_path, output_path):
+    # 画像を読み込む
+    img = cv2.imread(image_path)
+    
+    # 初期マスクを作成する
+    mask = np.zeros(img.shape[:2], np.uint8)
+    
+    # 背景モデルと前景モデルを初期化する
+    bgd_model = np.zeros((1, 65), np.float64)
+    fgd_model = np.zeros((1, 65), np.float64)
+    
+    # 画像の領域を定義する
+    rect = (10, 10, img.shape[1]-10, img.shape[0]-10) # 画像のほぼ全領域を指定します
+    
+    # GrabCutアルゴリズムを実行する
+    cv2.grabCut(img, mask, rect, bgd_model, fgd_model, 5, cv2.GC_INIT_WITH_RECT)
+    
+    # 新しいマスクを作成する
+    mask2 = np.where((mask == 2) | (mask == 0), 0, 1).astype('uint8')
+    
+    # 画像に新しいマスクを乗算して背景を除去する
+    img = img * mask2[:, :, np.newaxis]
+    
+    # 出力画像を保存する
+    cv2.imwrite(output_path, img)
 
-def remove_bg_u2net(model_path, input_image_path):
-    # モデルのロード
-    net = U2NET(3, 1)
-    net.load_state_dict(torch.load(model_path))
-    net.eval()
-
-    # 画像の変換
-    transform = transforms.Compose([
-        transforms.Resize((320, 320)),
-        transforms.ToTensor()
-    ])
-
-    img = Image.open(input_image_path).convert('RGB')
-    img = transform(img)
-    img = img.unsqueeze(0)
-
-    # 予測
-    with torch.no_grad():
-        prediction = net(img)
-
-    # 予測結果をマスクとして使用
-    mask = prediction.squeeze().cpu().numpy()
-    mask[mask > 0.5] = 1
-    mask[mask <= 0.5] = 0
-
-    original = Image.open(input_image_path).convert("RGBA")
-    for i in range(original.size[0]):
-        for j in range(original.size[1]):
-            if mask[j][i] == 0:
-                original.putpixel((i,j), (255,255,255,0))
-
-    return original
-
-# 使用例:
-model_path = 'path_to_pretrained_u2net.pth'
-input_image_path = 'path_to_input_image.jpg'
-result = remove_bg_u2net(model_path, input_image_path)
-result.show()
+# 使用例
+remove_background('input_image.jpg', 'output_no_bg.png')
