@@ -27,15 +27,19 @@ public class GoalSetting extends AppCompatActivity {
         goToGameTopPageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                goal = saveGoalInfo();
 
-                float targetWeight = Float.parseFloat(targetWeightEditText.getText().toString());
-                String targetDuration = targetDurationEditText.getText().toString();
-
-                Goal goal = new Goal(targetWeight, targetDuration);
-
-                Intent intent = new Intent(GoalSetting.this, GameTopPage.class);
+                Intent intent = new Intent(GoalSetting.this, MakeCharacter.class);
                 startActivity(intent);
             }
         });
+    }
+    private Goal saveGoalInfo() {
+        float targetWeight = Float.parseFloat(targetWeightEditText.getText().toString());
+        float targetDuration = Float.parseFloat(targetDurationEditText.getText().toString());
+
+        goal = new Goal(targetWeight, targetDuration);
+
+        return goal;
     }
 }
