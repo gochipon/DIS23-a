@@ -70,5 +70,15 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        Button goToGoalSettingButton = findViewById(R.id.goToGoalSettingButton);
+        goToGoalSettingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, GoalSetting.class);
+                startActivity(intent);
+            }
+        });
     }
+
 }

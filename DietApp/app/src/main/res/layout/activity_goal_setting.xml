@@ -42,6 +42,7 @@
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="24dp" />
 
+
     <!-- 目標期間のEditText -->
     <EditText
         android:id="@+id/targetDurationEditText"
