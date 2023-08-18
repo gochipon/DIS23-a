@@ -14,8 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.dietapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
+//
+//    private AppBarConfiguration appBarConfiguration;
     private Spinner genderSpinner;
     private Spinner activityLevelSpinner;
     private EditText ageEditText;
