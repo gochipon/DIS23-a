@@ -14,9 +14,5 @@ public class GameTopPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
-//
-//        float weightValue = MainActivity.weight;
-//
-//        binding.weightActivity.setText("Weight: " + weightValue + "kg");
     }
 }
