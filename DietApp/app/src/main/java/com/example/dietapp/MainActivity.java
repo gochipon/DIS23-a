@@ -22,7 +22,6 @@ public class MainActivity extends AppCompatActivity {
     private EditText weightEditText;
     private EditText heightEditText;
 
-
     private User user;
 
     @Override
@@ -31,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button goToGoalSettingButton = findViewById(R.id.goToGoalSettingButton);
-
 
         genderSpinner = findViewById(R.id.genderSpinner);
         activityLevelSpinner = findViewById(R.id.activityLevelSpinner);
