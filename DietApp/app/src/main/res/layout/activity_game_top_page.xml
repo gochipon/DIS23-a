@@ -6,14 +6,14 @@
     android:padding="16dp">
 
 
-<!--  <TextView-->
-<!--      android:id="@+id/weightActivity"-->
-<!--      android:layout_width="wrap_content"-->
-<!--      android:layout_height="wrap_content"-->
-<!--      android:text="Weight: "-->
-<!--      app:layout_constraintTop_toBottomOf="@id/testImageView"-->
-<!--      app:layout_constraintStart_toStartOf="parent"-->
-<!--      app:layout_constraintEnd_toEndOf="parent" />-->
+  <TextView
+      android:id="@+id/WeightTextView"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Weight: "
+      app:layout_constraintTop_toBottomOf="@id/testImageView"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
 
   <!-- ユーザー名表示 -->
   <TextView

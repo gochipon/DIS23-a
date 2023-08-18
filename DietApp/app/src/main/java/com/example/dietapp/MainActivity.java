@@ -15,76 +15,52 @@ import com.example.dietapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActivityMainBinding binding;
+    private AppBarConfiguration appBarConfiguration;
+    private Spinner genderSpinner;
+    private Spinner activityLevelSpinner;
+    private EditText ageEditText;
+    private EditText weightEditText;
+    private EditText heightEditText;
 
-    public EditText weightEditText;
-    public EditText heightEditText;
-    public EditText ageEditText;
-    public static int age;
-    public static float height;
-    public static float weight;
+
+    private User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityMainBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        weightEditText = binding.weightEditText;
-        heightEditText = binding.heightEditText;
-        ageEditText = binding.ageEditText;
-
-        Spinner genderSpinner = findViewById(R.id.genderSpinner);
-        genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // ここに選択されたときのアクションを書く（必要であれば）
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // ここに何も選択されていない場合のアクションを書く（必要であれば）
-            }
-        });
-
-        Spinner activityLevelSpinner = findViewById(R.id.activityLevelSpinner);
-        activityLevelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // ここに選択されたときのアクションを書く（必要であれば）
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // ここに何も選択されていない場合のアクションを書く（必要であれば）
-            }
-        });
+        setContentView(R.layout.activity_main);
 
         Button goToGoalSettingButton = findViewById(R.id.goToGoalSettingButton);
+
+
+        genderSpinner = findViewById(R.id.genderSpinner);
+        activityLevelSpinner = findViewById(R.id.activityLevelSpinner);
+        ageEditText = findViewById(R.id.ageEditText);
+        weightEditText = findViewById(R.id.weightEditText);
+        heightEditText = findViewById(R.id.heightEditText);
+
+
         goToGoalSettingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    String ageString = ageEditText.getText().toString();
-                    String weightString = weightEditText.getText().toString();
-                    String heightString = heightEditText.getText().toString();
+                saveUserInfo();
 
-                    if (ageString.isEmpty() || weightString.isEmpty() || heightString.isEmpty()) {
-                        Toast.makeText(MainActivity.this, "すべての項目を入力してください。", Toast.LENGTH_SHORT).show();
-                        return;
-                    }
 
-                    age = Integer.parseInt(ageString);
-                    height = Float.parseFloat(heightString);
-                    weight = Float.parseFloat(weightString);
-
-                    Intent intent = new Intent(MainActivity.this, GoalSetting.class);
-                    startActivity(intent);
-                } catch (NumberFormatException e) {
-                    Toast.makeText(MainActivity.this, "正しい値を入力してください。", Toast.LENGTH_SHORT).show();
-                }
+                Intent intent = new Intent(MainActivity.this, GoalSetting.class);
+                startActivity(intent);
             }
         });
     }
+
+        private void saveUserInfo() {
+            String gender = genderSpinner.getSelectedItem().toString();
+            String activityLevel = activityLevelSpinner.getSelectedItem().toString();
+            int age = Integer.parseInt(ageEditText.getText().toString());
+            float weight = Float.parseFloat(weightEditText.getText().toString());
+            float height = Float.parseFloat(heightEditText.getText().toString());
+
+            user = new User(gender, activityLevel, age, weight, height);
+
+            // 以降、user オブジェクトを使用して処理...
+        }
 }
