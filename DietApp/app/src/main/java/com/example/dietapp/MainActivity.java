@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText ageEditText;
     private EditText weightEditText;
     private EditText heightEditText;
+    private EditText usernameEditText;
 
     public static User user;
 
@@ -36,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         ageEditText = findViewById(R.id.ageEditText);
         weightEditText = findViewById(R.id.weightEditText);
         heightEditText = findViewById(R.id.heightEditText);
+        usernameEditText = findViewById(R.id.usernameEditText);
 
 
         goToGoalSettingButton.setOnClickListener(new View.OnClickListener() {
@@ -51,13 +53,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
         private User saveUserInfo() {
+            String username = usernameEditText.getText().toString();
             String gender = genderSpinner.getSelectedItem().toString();
             String activityLevel = activityLevelSpinner.getSelectedItem().toString();
             int age = Integer.parseInt(ageEditText.getText().toString());
             float weight = Float.parseFloat(weightEditText.getText().toString());
             float height = Float.parseFloat(heightEditText.getText().toString());
 
-            user = new User(gender, activityLevel, age, weight, height);
+            user = new User(username, gender, activityLevel, age, weight, height);
 
             // 以降、user オブジェクトを使用して処理...
 

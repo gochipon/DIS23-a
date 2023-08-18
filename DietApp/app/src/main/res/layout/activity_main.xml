@@ -13,6 +13,22 @@
         android:orientation="vertical"
         android:padding="10dp">
 
+        <!-- ユーザー名入力 -->
+        <TextView
+            android:id="@+id/usernameLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ニックネーム"
+            android:gravity="start"
+            android:layout_marginBottom="4dp" />
+
+        <EditText
+            android:id="@+id/usernameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:layout_marginBottom="16dp"/>
+
         <!-- 性別のラベルと入力 -->
         <TextView
             android:id="@+id/genderLabel"

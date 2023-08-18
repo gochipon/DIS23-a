@@ -1,5 +1,6 @@
 package com.example.dietapp;
 
+import static com.example.dietapp.MainActivity.user;
 import static com.example.dietapp.MorningPage.currentBitmapMorning;
 import static com.example.dietapp.NightPage.currentBitmapNight;
 import static com.example.dietapp.NoonPage.currentBitmapNoon;
@@ -12,6 +13,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import java.io.FileInputStream;
 import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
@@ -33,6 +35,11 @@ public class GameTopPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
 
+        // TextViewを参照
+        TextView myTextView = findViewById(R.id.usernameTextView);
+
+        // TextViewに文字列をセット
+        myTextView.setText(user.getUsername());
         // 各ボタンのリスナーをセット
         morningButton = findViewById(R.id.morningButton);
         morningButton.setOnClickListener(new View.OnClickListener() {
