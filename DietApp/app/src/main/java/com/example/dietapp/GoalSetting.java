@@ -1,5 +1,7 @@
 package com.example.dietapp;
 
+import static com.example.dietapp.MainActivity.user;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -9,12 +11,18 @@ import android.widget.Button;
 import android.widget.Toast;
 import android.widget.EditText;
 
+import static com.example.dietapp.MainActivity.user;
+
 public class GoalSetting extends AppCompatActivity {
 
 
     private EditText targetWeightEditText;
     private EditText targetDurationEditText;
     public static Goal goal;
+
+
+    private Button helloButton;
+    private float weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,7 @@ public class GoalSetting extends AppCompatActivity {
 
                 Intent intent = new Intent(GoalSetting.this, GameTopPage.class);
                 startActivity(intent);
+
             }
         });
     }

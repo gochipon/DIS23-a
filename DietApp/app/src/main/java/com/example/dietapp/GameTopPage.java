@@ -3,6 +3,10 @@ package com.example.dietapp;
 import static com.example.dietapp.MainActivity.user;
 import static com.example.dietapp.GoalSetting.goal;
 
+import static com.example.dietapp.MorningPage.currentBitmapMorning;
+import static com.example.dietapp.NightPage.currentBitmapNight;
+import static com.example.dietapp.NoonPage.currentBitmapNoon;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +16,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import java.io.FileInputStream;
 import android.widget.ImageView;
+import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -101,6 +106,13 @@ public class GameTopPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
 
+        // TextViewを参照
+        TextView myTextView = findViewById(R.id.usernameTextView);
+
+        // TextViewに文字列をセット
+        myTextView.setText(user.getUsername());
+        
+        //アドバイスを更新
         getDietAdvice();
         // 各ボタンのリスナーをセット
         morningButton = findViewById(R.id.morningButton);
@@ -131,7 +143,6 @@ public class GameTopPage extends AppCompatActivity {
             FileInputStream fis = openFileInput("Morning.jpg");
             Bitmap savedBitmap = BitmapFactory.decodeStream(fis);
             fis.close();
-            // Now you can use the savedBitmap to display the image
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -143,9 +154,15 @@ public class GameTopPage extends AppCompatActivity {
         ImageView noonImageView = findViewById(R.id.noonImageView);
         ImageView nightImageView = findViewById(R.id.nightImageView);
 
-        morningImageView.setImageBitmap(loadedImage);
-        noonImageView.setImageBitmap(loadedImage);
-        nightImageView.setImageBitmap(loadedImage);
+//        morningImageView.setImageBitmap(loadedImage);
+        morningImageView.setImageBitmap(currentBitmapMorning);
+        noonImageView.setImageBitmap(currentBitmapNoon);
+        nightImageView.setImageBitmap(currentBitmapNight);
+
+
+
+//        MorningPage morningPage = new MorningPage();
+//        Bitmap savedImage = morningPage.getSavedImage();
 
     }
 
