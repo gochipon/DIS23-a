@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.squareup.picasso.Picasso;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,9 +37,13 @@ import okhttp3.Response;
 
 
 public class GameTopPage extends AppCompatActivity {
-
     private OkHttpClient client = new OkHttpClient();
-
+    private void displayImage(String imageUrl) {
+        runOnUiThread(() -> {
+            ImageView imageView = findViewById(R.id.testImageView); // 画像を置き換えたいImageViewのID
+            Picasso.get().load(imageUrl).into(imageView);
+        });
+    }
     private void getDietAdvice() {
         String url = "http://10.0.2.2:8080/diet-advice";
 
@@ -136,14 +142,19 @@ public class GameTopPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
 
+        //アドバイスを更新
+        getDietAdvice();
+
+        // characterオブジェクトから画像URLを取得して、displayImage関数で画像を置き換えます
+        String imageUrl = character.getImageUrl();
+        displayImage(imageUrl);
+
         // TextViewを参照
         TextView myTextView = findViewById(R.id.usernameTextView);
 
         // TextViewに文字列をセット
         myTextView.setText(user.getUsername());
 
-        //アドバイスを更新
-        getDietAdvice();
         // 各ボタンのリスナーをセット
         morningButton = findViewById(R.id.morningButton);
         morningButton.setOnClickListener(new View.OnClickListener() {

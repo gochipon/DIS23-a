@@ -15,17 +15,20 @@ def generate_advice(data):
     ・絵文字を多用\n\
     ・2文以内\n\
     ・80文字以内\n\
+    ・最初に今日の摂取カロリーの上限に関する言及をすること\n\
+    ・食事が空白の場合はそこに関する言及はしないこと\n\
+    ・摂取カロリーが今日の摂取カロリーの上限を超えている場合は、摂取カロリーに関する言及をすること\n\
     ユーザーの属性：\n\
     ・現在の体重：{data['weight']}kg\n\
     ・身長：{data['height']}cm\n\
     ・年齢：{data['age']}歳\n\
     ・性別：{data['gender']}\n\
     今日の記録\n\
+    ・摂取カロリーの上限：{data['target_calories']}kcal\n\
     ・消費カロリー：{data['calories_burned']}kcal\n\
     ・食事：{data['food']}\n\
     ・摂取カロリー：{data['calories_ate']}kcal\n\
     目標\n\
-    ・今日の摂取カロリーの上限：{data['target_calories']}kcal\n\
     ・目標体重：{data['target_weight']}㎏\n\
     ・目標期間：{data['target_period']}日\n\
     アドバイス："

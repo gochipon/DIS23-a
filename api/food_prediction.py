@@ -1,3 +1,4 @@
+from PIL import Image
 from tensorflow import compat
 import tensorflow_hub as hub
 import numpy as np
@@ -7,14 +8,37 @@ from skimage import io
 import imageio as iio
 import json
 import requests
+import base64
+import io
 
-def predictFood(path_to_image):
+def api_predict(encoded_image):
+    # Base64デコードしてPIL画像オブジェクトに変換
+    decoded_image = base64.b64decode(encoded_image)
+    image = Image.open(io.BytesIO(decoded_image))
+    
+    # サイズ変更
+    image = image.resize((224, 224))
+    
+    # 画像をnumpy arrayに変換
+    image_array = np.array(image)
+
+    # predictFoodを呼び出し
+    return predictFood(image_array)
+
+def predictFood(bitmap):
     m = hub.KerasLayer('https://tfhub.dev/google/aiy/vision/classifier/food_V1/1')
-    image = iio.imread(path_to_image)
+    
+    # Convert bitmap to numpy array
+    image = np.array(bitmap)
+    if image is None:
+        print("Error loading image")
+        return
+    print(image.dtype)
+    print(image.shape)
+
     labelmap_url = "https://www.gstatic.com/aihub/tfhub/labelmaps/aiy_food_V1_labelmap.csv"
     input_shape = (224, 224)
 
-    # image = np.asarray(io.imread(cake_url), dtype="float")
     image = cv2.resize(image, dsize=input_shape, interpolation=cv2.INTER_CUBIC)
     # Scale values to [0, 1].
     image = image / image.max()
@@ -57,3 +81,22 @@ def get_calories_for_dish(dish_name, app_id=food_app_id, app_key=food_app_key):
     
     # If there's an error or unexpected structure
     raise ValueError(f"Could not find calorie data for {dish_name}")
+
+# from PIL import Image
+
+# # 画像を読み込む
+# image_path = "../ramen.jpg"
+# with Image.open(image_path) as img:
+#     # PIL ImageオブジェクトをNumpy配列（bitmap）に変換
+#     bitmap = np.array(img)
+
+# # predictFood関数でbitmapを使って食品を予測
+# predicted_food = predictFood(bitmap)
+# print(f"Predicted food is: {predicted_food}")
+
+# # 予測された食品のカロリーを取得
+# try:
+#     calories = get_calories_for_dish(predicted_food)
+#     print(f"Calories for {predicted_food}: {calories} kcal")
+# except ValueError as e:
+#     print(e)
