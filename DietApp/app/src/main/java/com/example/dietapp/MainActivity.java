@@ -15,16 +15,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.dietapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
+//
+//    private AppBarConfiguration appBarConfiguration;
     private Spinner genderSpinner;
     private Spinner activityLevelSpinner;
     private EditText ageEditText;
     private EditText weightEditText;
     private EditText heightEditText;
 
-
-    private User user;
+    private static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         Button goToGoalSettingButton = findViewById(R.id.goToGoalSettingButton);
-
 
         genderSpinner = findViewById(R.id.genderSpinner);
         activityLevelSpinner = findViewById(R.id.activityLevelSpinner);
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         goToGoalSettingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                saveUserInfo();
+                user = saveUserInfo();
 
 
                 Intent intent = new Intent(MainActivity.this, GoalSetting.class);
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-        private void saveUserInfo() {
+        private User saveUserInfo() {
             String gender = genderSpinner.getSelectedItem().toString();
             String activityLevel = activityLevelSpinner.getSelectedItem().toString();
             int age = Integer.parseInt(ageEditText.getText().toString());
@@ -63,5 +61,7 @@ public class MainActivity extends AppCompatActivity {
             user = new User(gender, activityLevel, age, weight, height);
 
             // 以降、user オブジェクトを使用して処理...
+
+            return user;
         }
 }

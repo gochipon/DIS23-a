@@ -1,18 +1,35 @@
 package com.example.dietapp;
 
 public class User {
-    private String gender;
-    private String activityLevel;
-    private int age;
-    private float weight;
-    private float height;
+    private static String gender;
+    private static String activityLevel;
+    private static int age;
+    private static float weight;
+    private static float height;
 
     // コンストラクタ
     public User(String gender, String activityLevel, int age, float weight, float height) {
-        this.gender = gender;
-        this.activityLevel = activityLevel;
-        this.age = age;
-        this.weight = weight;
-        this.height = height;
+        User.gender = gender;
+        User.activityLevel = activityLevel;
+        User.age = age;
+        User.weight = weight;
+        User.height = height;
+    }
+
+    public static String getGender() {
+        return gender;
+    }
+    public static float getWeight() {
+        return weight;
+    }
+    public static float getHeight() {
+        return height;
+    }
+    public static String getActivityLevel() {
+        return activityLevel;
+    }
+
+    public static void setWeight(String username) {
+        User.weight = weight;
     }
 }
