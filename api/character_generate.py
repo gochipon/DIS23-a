@@ -35,7 +35,7 @@ translation_dict = {
     'イルカ': 'dolphin',
     'アザラシ': 'seal',
     '蝶': 'butterfly',
-    'カブトムシ': 'rhinoceros beetle'
+    'カブトムシ': 'rhinoceros beetle',
     
     # Personality traits
     'ポジティブ': 'positive',

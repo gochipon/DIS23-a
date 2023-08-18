@@ -8,14 +8,7 @@ app = Flask(__name__)
 @app.route('/diet-advice', methods=['POST'])
 def give_advice():
     data = request.json
-    character = data["character"]
-    weight = data["weight"]
-    height = data["height"]
-    age = data["age"]
-    gender = data["gender"]
-    calories_burned = data["calories_burned"]
-    food = data["food"]
-    advice = ag.generate_advice(character, weight, height, age, gender, calories_burned, food)
+    advice = ag.generate_advice(data)
     return jsonify({"advice": advice})
 
 @app.route('/generate', methods=['POST'])
@@ -34,4 +27,4 @@ def get_food_prediction():
     return jsonify({"food": prediction, "calories_ate": calories})
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=8080)
