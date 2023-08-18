@@ -205,6 +205,15 @@ public class GameTopPage extends AppCompatActivity {
 //        MorningPage morningPage = new MorningPage();
 //        Bitmap savedImage = morningPage.getSavedImage();
 
+        TextView usernameTextView = findViewById(R.id.usernameTextView);
+        usernameTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // ここで新しいアクティビティに遷移します。
+                Intent intent = new Intent(GameTopPage.this, Graph.class); // GraphActivityは遷移先のアクティビティ名です。
+                startActivity(intent);
+            }
+        });
     }
 
     // PictureInputページへの遷移処理
