@@ -11,67 +11,89 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:spacing="10dp">
+        android:padding="10dp">
 
+        <!-- 性別のラベルと入力 -->
         <TextView
-            android:id="@+id/genderHint"
+            android:id="@+id/genderLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="性別を選択"
+            android:text="性別"
             android:gravity="start"
-            android:layout_marginStart="8dp"
-            android:clickable="true"
-            android:focusable="true" />
+            android:layout_marginBottom="4dp" />
 
-        <!-- 性別の入力 -->
         <Spinner
             android:id="@+id/genderSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="性別"
+            android:layout_marginBottom="16dp"
             android:entries="@array/gender_array" />
 
-        <!-- 体重の入力 -->
+        <!-- 体重のラベルと入力 -->
+        <TextView
+            android:id="@+id/weightLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="体重 (kg)"
+            android:gravity="start"
+            android:layout_marginBottom="4dp" />
+
         <EditText
             android:id="@+id/weightEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="体重 (kg)"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="16dp"/>
 
-        <!-- 身長の入力 -->
+        <!-- 身長のラベルと入力 -->
+        <TextView
+            android:id="@+id/heightLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="身長 (cm)"
+            android:gravity="start"
+            android:layout_marginBottom="4dp" />
+
         <EditText
             android:id="@+id/heightEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="身長 (cm)"
-            android:inputType="numberDecimal" />
+            android:inputType="numberDecimal"
+            android:layout_marginBottom="16dp"/>
 
-        <!-- 年齢の入力 -->
+        <!-- 年齢のラベルと入力 -->
+        <TextView
+            android:id="@+id/ageLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="年齢"
+            android:gravity="start"
+            android:layout_marginBottom="4dp" />
+
         <EditText
             android:id="@+id/ageEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="年齢"
-            android:inputType="number" />
+            android:inputType="number"
+            android:layout_marginBottom="16dp"/>
 
-        <!-- 活動量の入力 -->
+        <!-- 活動量のラベルと入力 -->
         <TextView
-            android:id="@+id/activityHint"
+            android:id="@+id/activityLabel"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="活動量を選択"
+            android:text="活動量"
             android:gravity="start"
-            android:layout_marginStart="8dp"
-            android:clickable="true"
-            android:focusable="true" />
+            android:layout_marginBottom="4dp" />
+
         <Spinner
             android:id="@+id/activityLevelSpinner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="活動量"
-            android:entries="@array/activity_level_array" />
+            android:entries="@array/activity_level_array"
+            android:layout_marginBottom="36dp"/>
 
+        <!-- 目標設定セクションのヘッダー -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -85,9 +107,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="目標を設定"
-            android:layout_gravity="center_horizontal|bottom" />
+            android:layout_gravity="center_horizontal" />
 
     </LinearLayout>
-
-
 </ScrollView>
