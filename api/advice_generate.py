@@ -2,28 +2,10 @@ from flask import Flask, request, jsonify
 import openai
 import json
 
-app = Flask(__name__)
-
 # OpenAI APIの認証情報をjsonファイルから読み込む
 with open("../config.json", "r") as f:
     config = json.load(f)
     openai.api_key = config["OPENAI_API_KEY"]
-
-@app.route('/diet-advice', methods=['POST'])
-def give_advice():
-    data = request.json
-
-    character = data["character"]
-    weight = data["weight"]
-    height = data["height"]
-    age = data["age"]
-    gender = data["gender"]
-    calories_burned = data["calories_burned"]
-    food = data["food"]
-
-    advice = generate_advice(character, weight, height, age, gender, calories_burned, food)
-
-    return jsonify({"advice": advice})
 
 def generate_advice(character, weight, height, age, gender, calories_burned, food):
     prompt_text = f"以下の属性を持つ人がダイエットしたいと考えています。この人がダイエット目標を達成するために、今日食べた食事と運動量から、ダイエットアドバイザーとして、具体的なアドバイスを出力して\n\
@@ -41,6 +23,7 @@ def generate_advice(character, weight, height, age, gender, calories_burned, foo
     ・消費カロリー：{calories_burned}kcal\n\
     ・食事：{food}\n\
     目標\n\
+    ・今日の目標消費カロリー：2000kcal\n\
     ・目標体重：70㎏\n\
     ・目標期間：2ヶ月"
 
@@ -52,6 +35,3 @@ def generate_advice(character, weight, height, age, gender, calories_burned, foo
     advice = response.choices[0].message["content"]
 
     return advice
-
-if __name__ == '__main__':
-    app.run(debug=True)

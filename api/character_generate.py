@@ -1,11 +1,7 @@
 import openai
-import requests
 import json
-from flask import Flask, request, jsonify
 from PIL import Image
 from io import BytesIO
-
-app = Flask(__name__)
 
 # OpenAI APIの認証情報をjsonファイルから読み込む
 with open("../config.json", "r") as f:
@@ -129,14 +125,3 @@ def create_prompt(character_type, character_traits, appearance_attributes=None, 
             prompt += f", with {translate_to_english(key)}"
 
     return prompt
-
-# APIエンドポイントの作成
-@app.route('/generate', methods=['POST'])
-def generate():
-    data = request.json
-    prompt = create_prompt(data["character_type"], data["character_traits"], data["appearance_attributes"], data["special_features"], data["animal_attributes"])
-    image_url = generate_image(prompt)
-    return jsonify({"image_url": image_url})
-
-if __name__ == "__main__":
-    app.run(debug=True)
