@@ -14,7 +14,7 @@ def give_advice():
 @app.route('/generate', methods=['POST'])
 def generate():
     data = request.json
-    prompt = cg.create_prompt(data["character_type"], data["character_traits"], data["appearance_attributes"], data["special_features"], data["animal_attributes"])
+    prompt = cg.create_prompt(data["character_type"], data["character_traits"], data["appearance_attributes"])
     image_url = cg.generate_image(prompt)
     return jsonify({"image_url": image_url})
 
