@@ -1,33 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
+    android:padding="16dp"
     tools:context=".MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        android:orientation="vertical"
+        android:spacing="10dp">
 
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/toolbar"
+        <TextView
+            android:id="@+id/genderHint"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize" />
+            android:layout_height="wrap_content"
+            android:text="性別を選択"
+            android:gravity="start"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:focusable="true" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+        <!-- 性別の入力 -->
+        <Spinner
+            android:id="@+id/genderSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="性別"
+            android:entries="@array/gender_array" />
 
-    <include layout="@layout/content_main" />
+        <!-- 体重の入力 -->
+        <EditText
+            android:id="@+id/weightEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="体重 (kg)"
+            android:inputType="numberDecimal" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_marginEnd="@dimen/fab_margin"
-        android:layout_marginBottom="16dp"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        <!-- 身長の入力 -->
+        <EditText
+            android:id="@+id/heightEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="身長 (cm)"
+            android:inputType="numberDecimal" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        <!-- 年齢の入力 -->
+        <EditText
+            android:id="@+id/ageEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="年齢"
+            android:inputType="number" />
+
+        <!-- 活動量の入力 -->
+        <TextView
+            android:id="@+id/activityHint"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="活動量を選択"
+            android:gravity="start"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:focusable="true" />
+        <Spinner
+            android:id="@+id/activityLevelSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="活動量"
+            android:entries="@array/activity_level_array" />
+
+    </LinearLayout>
+
+
+</ScrollView>
