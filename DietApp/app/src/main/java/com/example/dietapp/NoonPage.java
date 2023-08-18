@@ -13,12 +13,27 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import java.io.FileOutputStream;
+import android.graphics.Bitmap;
 
-public class Picture_input extends AppCompatActivity {
+
+public class NoonPage extends AppCompatActivity {
 
     private ImageView imageView;
     private Button buttonComplete, buttonRetake;
     private Bitmap currentBitmap = null;
+    private String saveImageToInternalStorage(Bitmap bitmap) {
+        try {
+            String filename = "Noon.jpg";
+            FileOutputStream fos = openFileOutput(filename, MODE_PRIVATE);
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.close();
+            return filename;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,11 +45,16 @@ public class Picture_input extends AppCompatActivity {
         buttonRetake = findViewById(R.id.button_retake);
 
         buttonComplete.setOnClickListener(v -> {
-            // Save the currentBitmap if needed
-            // ...
-
+            if (currentBitmap != null) {
+                String savedFilename = saveImageToInternalStorage(currentBitmap);
+                if (savedFilename != null) {
+                    Log.d("debug", "Image saved as: " + savedFilename);
+                } else {
+                    Log.e("debug", "Error saving image.");
+                }
+            }
             // Go back to GameTopPage
-            Intent intent = new Intent(Picture_input.this, GameTopPage.class);
+            Intent intent = new Intent(NoonPage.this, GameTopPage.class);
             startActivity(intent);
             finish();
         });

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
+
     <queries>
         <intent>
             <action android:name="android.media.action.IMAGE_CAPTURE" />
         </intent>
     </queries>
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -17,7 +21,13 @@
         android:theme="@style/Theme.DietApp"
         tools:targetApi="31">
         <activity
-            android:name=".Picture_input"
+            android:name=".NightPage"
+            android:exported="false" />
+        <activity
+            android:name=".NoonPage"
+            android:exported="false" />
+        <activity
+            android:name=".MorningPage"
             android:exported="false" />
         <activity
             android:name=".GameTopPage"
