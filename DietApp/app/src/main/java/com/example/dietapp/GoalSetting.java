@@ -28,17 +28,6 @@ public class GoalSetting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_goal_setting);
 
-        helloButton = findViewById(R.id.helloButton);
-
-        helloButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // ボタンがクリックされたときの処理
-                weight = user.getWeight();
-                Toast.makeText(getApplicationContext(), "はろー！" + weight, Toast.LENGTH_SHORT).show();
-            }
-        });
-
         targetWeightEditText = findViewById(R.id.targetWeightEditText);
         targetDurationEditText = findViewById(R.id.targetDurationEditText);
         Button goToGameTopPageButton = findViewById(R.id.goToGameTopPageButton);

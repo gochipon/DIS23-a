@@ -26,6 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="例：60kg"
+        android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/targetWeightLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -49,6 +50,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:hint="例：30日"
+        android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/targetDurationLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -64,15 +66,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="24dp" />
-
-    <Button
-        android:id="@+id/helloButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Click Me"
-        app:layout_constraintTop_toBottomOf="@id/targetDurationEditText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_centerInParent="true" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
