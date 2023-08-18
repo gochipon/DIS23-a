@@ -54,6 +54,7 @@ public class MorningPage extends AppCompatActivity {
             Log.d("debug", "picture");
             if (currentBitmapMorning != null) {
                 String savedFilename = saveImageToInternalStorage(currentBitmapMorning);
+
                 if (savedFilename != null) {
                     Log.d("debug", "Image saved as: " + savedFilename);
                 } else {

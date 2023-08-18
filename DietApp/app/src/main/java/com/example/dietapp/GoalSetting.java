@@ -18,6 +18,7 @@ public class GoalSetting extends AppCompatActivity {
 
     private EditText targetWeightEditText;
     private EditText targetDurationEditText;
+    public static Goal goal;
 
 
     private Button helloButton;

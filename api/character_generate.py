@@ -35,7 +35,7 @@ translation_dict = {
     'イルカ': 'dolphin',
     'アザラシ': 'seal',
     '蝶': 'butterfly',
-    'カブトムシ': 'rhinoceros beetle'
+    'カブトムシ': 'rhinoceros beetle',
     
     # Personality traits
     'ポジティブ': 'positive',
@@ -112,9 +112,6 @@ def create_prompt(character_type, character_traits, appearance_attributes=None, 
         prompt += " who is " + " and ".join(traits_in_english)
 
     if character_type in ["男性", "女性"] and appearance_attributes:
-        for key, value in appearance_attributes.items():
-            prompt += f", with {translate_to_english(value)} {translate_to_english(key)}"
-        for key, value in special_features.items():
-            prompt += f", with {translate_to_english(value)}"
+        prompt += f", with {translate_to_english(appearance_attributes.split(':')[1])} {translate_to_english(appearance_attributes.split(':')[0])}"
 
     return prompt

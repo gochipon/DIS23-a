@@ -9,6 +9,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
+import androidx.navigation.ui.AppBarConfiguration;
 
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.dietapp.databinding.ActivityMainBinding;

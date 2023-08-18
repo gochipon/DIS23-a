@@ -30,6 +30,9 @@ public class User {
     public static float getHeight() {
         return height;
     }
+    public static float getAge() {
+        return age;
+    }
     public static String getActivityLevel() {
         return activityLevel;
     }
