@@ -21,6 +21,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -29,12 +30,32 @@ public class MainActivity extends AppCompatActivity {
     private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
+    public EditText weightEditText;
+    public EditText heightEditText;
+    public EditText ageEditText;
+    public static int age;
+    public static float height;
+    public static float weight;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        weightEditText = binding.weightEditText;
+        heightEditText = binding.heightEditText;
+        ageEditText    = binding.ageEditText;
+        String ageString = ageEditText.getText().toString();
+        String weightString = weightEditText.getText().toString();
+        String heightString = heightEditText.getText().toString();
+        age = Integer.parseInt(ageString);
+        height = Float.parseFloat(ageString);
+        weight = Float.parseFloat(ageString);
+
+        final TextView genderHint = findViewById(R.id.genderHint);
 
         Spinner genderSpinner = findViewById(R.id.genderSpinner);
         genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
