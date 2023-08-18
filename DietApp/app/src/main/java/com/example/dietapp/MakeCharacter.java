@@ -23,6 +23,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 public class MakeCharacter extends AppCompatActivity {
+    public static Character character;
     Spinner characterTypeSpinner, characterTraitSpinner, characterAppearanceSpinner;
     Button btnSubmit;  // 追加
     private final OkHttpClient client = new OkHttpClient();
@@ -75,7 +76,6 @@ public class MakeCharacter extends AppCompatActivity {
         });
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,13 +94,29 @@ public class MakeCharacter extends AppCompatActivity {
             String trait = characterTraitSpinner.getSelectedItem().toString();
             String appearance = characterAppearanceSpinner.getSelectedItem().toString();
             callGenerateAPI(type, trait, appearance);
+
             // キャラクター生成後、btnSubmitボタンを表示する
             btnSubmit.setVisibility(View.VISIBLE);
         });
         // btnSubmitボタンのクリックリスナーを設定
-        btnSubmit.setOnClickListener(v -> {
-            Intent intent = new Intent(MakeCharacter.this, GameTopPage.class);
-            startActivity(intent);
+        Button goToGameTopPageButton = findViewById(R.id.btnSubmit);
+
+        goToGameTopPageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                character = saveCharacter();
+                Intent intent = new Intent(MakeCharacter.this, GameTopPage.class);
+                startActivity(intent);
+            }
         });
+    }
+    private Character saveCharacter() {
+        String type = characterTypeSpinner.getSelectedItem().toString();
+        String trait = characterTraitSpinner.getSelectedItem().toString();
+        String appearance = characterAppearanceSpinner.getSelectedItem().toString();
+
+        character = new Character(type, trait, appearance);
+
+        return character;
     }
 }

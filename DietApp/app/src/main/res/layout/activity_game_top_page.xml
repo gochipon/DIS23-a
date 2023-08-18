@@ -5,16 +5,6 @@
     android:layout_height="match_parent"
     android:padding="16dp">
 
-
-  <TextView
-      android:id="@+id/WeightTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Weight: "
-      app:layout_constraintTop_toBottomOf="@id/testImageView"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
-
   <!-- ユーザー名表示 -->
   <TextView
       android:id="@+id/usernameTextView"
@@ -27,18 +17,36 @@
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent" />
 
+  <SeekBar
+      android:id="@+id/customSeekBar"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:max="100"
+      android:progress="50"
+      android:thumb="@android:color/transparent"
+      app:layout_constraintTop_toBottomOf="@id/usernameTextView" />
+  <TextView
+      android:id="@+id/customSeekBarLabel"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="残り消費可能カロリー"
+      android:textSize="12sp"
+      app:layout_constraintTop_toBottomOf="@id/customSeekBar"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"/>
+
+
   <!-- 中心の画像 -->
   <ImageView
       android:id="@+id/testImageView"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:src="@drawable/test"
-      app:layout_constraintTop_toBottomOf="@id/usernameTextView"
+      app:layout_constraintTop_toBottomOf="@id/customSeekBar"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintVertical_bias="0.4"
       android:layout_marginTop="40dp" />
-
 
   <!-- 吹き出しテキスト -->
   <TextView

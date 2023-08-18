@@ -25,9 +25,9 @@
         <EditText
             android:id="@+id/usernameEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:inputType="text"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"/>
 
         <!-- 性別のラベルと入力 -->
         <TextView
@@ -42,7 +42,7 @@
             android:id="@+id/genderSpinner"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="8dp"
             android:entries="@array/gender_array" />
 
         <!-- 体重のラベルと入力 -->
@@ -57,9 +57,9 @@
         <EditText
             android:id="@+id/weightEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:inputType="numberDecimal"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"/>
 
         <!-- 身長のラベルと入力 -->
         <TextView
@@ -73,9 +73,9 @@
         <EditText
             android:id="@+id/heightEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:inputType="numberDecimal"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"/>
 
         <!-- 年齢のラベルと入力 -->
         <TextView
@@ -89,15 +89,15 @@
         <EditText
             android:id="@+id/ageEditText"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:inputType="number"
-            android:layout_marginBottom="16dp"/>
+            android:layout_marginBottom="8dp"/>
 
         <!-- 活動量のラベルと入力 -->
         <TextView
             android:id="@+id/activityLabel"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="wrap_content"
             android:text="活動量"
             android:gravity="start"
             android:layout_marginBottom="4dp" />
@@ -105,9 +105,9 @@
         <Spinner
             android:id="@+id/activityLevelSpinner"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="48dp"
             android:entries="@array/activity_level_array"
-            android:layout_marginBottom="36dp"/>
+            android:layout_marginBottom="16dp"/>
 
         <!-- 目標設定セクションのヘッダー -->
         <TextView
