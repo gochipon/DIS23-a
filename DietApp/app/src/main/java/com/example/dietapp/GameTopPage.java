@@ -84,7 +84,6 @@ public class GameTopPage extends AppCompatActivity {
             jsonObject.put("target_calories", target_calories);
             jsonObject.put("target_weight", goal.getTargetWeight());
             jsonObject.put("target_period", goal.getTargetDuration());
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

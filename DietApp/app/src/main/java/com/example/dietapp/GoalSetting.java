@@ -37,7 +37,7 @@ public class GoalSetting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goal = saveGoalInfo();
-                food = new Food("","","",0,0,0, "add.png", "add.png", "add.png");
+                //food = new Food("","","",0,0,0, "add.png", "add.png", "add.png");
 
                 Intent intent = new Intent(GoalSetting.this, MakeCharacter.class);
                 startActivity(intent);
