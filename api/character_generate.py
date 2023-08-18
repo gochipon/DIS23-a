@@ -24,7 +24,18 @@ translation_dict = {
     # Character types
     '男性': 'male',
     '女性': 'female',
-    '動物': 'animal',
+    '犬': 'dog',
+    '猫': 'cat',
+    'ウサギ': 'rabbit',
+    'ライオン': 'lion',
+    'ペンギン': 'penguin',
+    '鶴': 'crane',
+    '蛇': 'snake',
+    'カメ': 'turtle',
+    'イルカ': 'dolphin',
+    'アザラシ': 'seal',
+    '蝶': 'butterfly',
+    'カブトムシ': 'rhinoceros beetle'
     
     # Personality traits
     'ポジティブ': 'positive',
@@ -88,27 +99,13 @@ translation_dict = {
     'リストバンド': 'wristband',
     '眼鏡': 'glasses',
     '帽子': 'hat',        
-
-    # Animals
-    '犬': 'dog',
-    '猫': 'cat',
-    'ウサギ': 'rabbit',
-    'ライオン': 'lion',
-    'ペンギン': 'penguin',
-    '鶴': 'crane',
-    '蛇': 'snake',
-    'カメ': 'turtle',
-    'イルカ': 'dolphin',
-    'アザラシ': 'seal',
-    '蝶': 'butterfly',
-    'カブトムシ': 'rhinoceros beetle'
 }
 
 def translate_to_english(japanese_input):
     return translation_dict.get(japanese_input, japanese_input)
 
-def create_prompt(character_type, character_traits, appearance_attributes=None, special_features=None, animal_attributes=None):
-    prompt = "high quality, deatailed, beautiful, anime style, face and upper body of a" + translate_to_english(character_type)
+def create_prompt(character_type, character_traits, appearance_attributes=None, special_features=None):
+    prompt = "high quality, deatailed, beautiful, anime style picture of face and upper body of a" + translate_to_english(character_type) + "character"
 
     if character_traits:
         traits_in_english = [translate_to_english(trait) for trait in character_traits]
@@ -119,9 +116,5 @@ def create_prompt(character_type, character_traits, appearance_attributes=None, 
             prompt += f", with {translate_to_english(value)} {translate_to_english(key)}"
         for key, value in special_features.items():
             prompt += f", with {translate_to_english(value)}"
-
-    elif character_type == "動物" and animal_attributes:
-        for key, value in appearance_attributes.items():
-            prompt += f", with {translate_to_english(key)}"
 
     return prompt

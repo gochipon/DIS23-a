@@ -31,7 +31,7 @@ def get_food_prediction():
     path_to_image = data['path_to_image']
     prediction = fp.predictFood(path_to_image)
     calories = fp.get_calories_for_dish(prediction)
-    return jsonify({"predicted_food": prediction, "calories": calories})
+    return jsonify({"food": prediction, "calories_ate": calories})
 
 if __name__ == "__main__":
     app.run(debug=True)
