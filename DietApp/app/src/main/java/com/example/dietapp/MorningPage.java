@@ -3,7 +3,18 @@ package com.example.dietapp;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
+import android.util.Base64;
 
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MediaType;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Context;
 import android.content.ContextWrapper;
@@ -17,9 +28,12 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.IOException;
+
 import android.graphics.Bitmap;
 
 
@@ -28,6 +42,7 @@ public class MorningPage extends AppCompatActivity {
     private ImageView imageView;
     private Button buttonComplete, buttonRetake;
     public static Bitmap currentBitmapMorning = null;
+    private OkHttpClient client = new OkHttpClient();
     private String saveImageToInternalStorage(Bitmap bitmap) {
         try {
             String filename = "Morning.jpg";
@@ -40,6 +55,52 @@ public class MorningPage extends AppCompatActivity {
             return null;
         }
     }
+    private void sendImageToServer(Bitmap bitmap) {
+        String url = "http://10.0.2.2:8080/predict-food";
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
+        byte[] byteArray = stream.toByteArray();
+        String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+        MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("bitmap", encodedImage);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        RequestBody body = RequestBody.create(JSON, jsonObject.toString());
+
+        Request request = new Request.Builder()
+                .url(url)
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
+                e.printStackTrace();
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String responseString = response.body().string();
+                    try {
+                        JSONObject jsonResponse = new JSONObject(responseString);
+                        String food = jsonResponse.getString("food");
+                        int calories_ate = jsonResponse.getInt("calories_ate");
+
+                        // 以下、受け取ったデータを使用した処理
+                        Log.d("API_RESPONSE", "Food: " + food + ", Calories: " + calories_ate);
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,24 +121,17 @@ public class MorningPage extends AppCompatActivity {
                 } else {
                     Log.e("debug", "Error saving image.");
                 }
+
+                // 画像をAPIに投げる
+                sendImageToServer(currentBitmapMorning);
             }
-//            try {
-//                String filename = "Morning.jpg"; // 保存したファイル名
-//                FileInputStream fis = openFileInput(filename);
-//                Bitmap bitmap = BitmapFactory.decodeStream(fis);
-//                fis.close();
-//
-////                ImageView imageView = findViewById(R.id.imageView); // ImageView のインスタンスを取得
-////                imageView.setImageBitmap(bitmap); // 読み込んだ Bitmap を設定
-//            } catch (Exception e) {
-//                e.printStackTrace();
-//            }
 
             // Go back to GameTopPage
             Intent intent = new Intent(MorningPage.this, GameTopPage.class);
             startActivity(intent);
             finish();
         });
+
 
         buttonRetake.setOnClickListener(v -> {
             buttonComplete.setVisibility(View.GONE);
@@ -101,6 +155,7 @@ public class MorningPage extends AppCompatActivity {
                     if (data != null) {
                         currentBitmapMorning = (Bitmap) data.getExtras().get("data");
                         if (currentBitmapMorning != null) {
+                            currentBitmapMorning = Bitmap.createScaledBitmap(currentBitmapMorning, 224, 224, true);
                             int bmpWidth = currentBitmapMorning.getWidth();
                             int bmpHeight = currentBitmapMorning.getHeight();
                             Log.d("debug", "Width: " + bmpWidth);

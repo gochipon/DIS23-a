@@ -21,8 +21,8 @@ def generate():
 @app.route('/predict-food', methods=['POST'])
 def get_food_prediction():
     data = request.json
-    path_to_image = data['path_to_image']
-    prediction = fp.predictFood(path_to_image)
+    bitmap = data['bitmap']
+    prediction = fp.api_predict(bitmap)
     calories = fp.get_calories_for_dish(prediction)
     return jsonify({"food": prediction, "calories_ate": calories})
 
