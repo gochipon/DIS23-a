@@ -34,3 +34,4 @@ response_img = requests.get(response_data['image_url'])
 img = Image.open(BytesIO(response_img.content))
 img.show()
 
+img.save('saved_image.jpg')
