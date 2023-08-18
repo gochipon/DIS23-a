@@ -45,7 +45,6 @@ public class MorningPage extends AppCompatActivity {
         buttonRetake = findViewById(R.id.button_retake);
 
         buttonComplete.setOnClickListener(v -> {
-            Log.d("debug", "picture");
             if (currentBitmap != null) {
                 String savedFilename = saveImageToInternalStorage(currentBitmap);
                 if (savedFilename != null) {
