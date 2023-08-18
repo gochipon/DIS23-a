@@ -4,12 +4,25 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import java.io.FileInputStream;
+import android.widget.ImageView;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
 public class GameTopPage extends AppCompatActivity {
 
     private Button morningButton, noonButton, nightButton;
+    private Bitmap loadImageFromInternalStorage(String filename) {
+        try {
+            FileInputStream fis = openFileInput(filename);
+            return BitmapFactory.decodeStream(fis);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,7 +34,7 @@ public class GameTopPage extends AppCompatActivity {
         morningButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToPictureInput();
+                goToMorningPage();
             }
         });
 
@@ -29,7 +42,7 @@ public class GameTopPage extends AppCompatActivity {
         noonButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToPictureInput();
+                goToNoonPage();
             }
         });
 
@@ -37,14 +50,42 @@ public class GameTopPage extends AppCompatActivity {
         nightButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToPictureInput();
+                goToNightPage();
             }
         });
+        // Load and set the image
+        try {
+            FileInputStream fis = openFileInput("Morning.jpg");
+            Bitmap savedBitmap = BitmapFactory.decodeStream(fis);
+            fis.close();
+            // Now you can use the savedBitmap to display the image
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        String filename = "Morning.jpg";
+        Bitmap loadedImage = loadImageFromInternalStorage(filename);
+
+        ImageView morningImageView = findViewById(R.id.morningImageView);
+        ImageView noonImageView = findViewById(R.id.noonImageView);
+        ImageView nightImageView = findViewById(R.id.nightImageView);
+
+        morningImageView.setImageBitmap(loadedImage);
+        noonImageView.setImageBitmap(loadedImage);
+        nightImageView.setImageBitmap(loadedImage);
     }
 
     // PictureInputページへの遷移処理
-    private void goToPictureInput() {
-        Intent intent = new Intent(GameTopPage.this, Picture_input.class);
+    private void goToMorningPage() {
+        Intent intent = new Intent(GameTopPage.this, MorningPage.class);
+        startActivity(intent);
+    }
+    private void goToNoonPage() {
+        Intent intent = new Intent(GameTopPage.this, NoonPage.class);
+        startActivity(intent);
+    }
+    private void goToNightPage() {
+        Intent intent = new Intent(GameTopPage.this, NightPage.class);
         startActivity(intent);
     }
 }
