@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText weightEditText;
     private EditText heightEditText;
 
-    private static User user;
+    public static User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

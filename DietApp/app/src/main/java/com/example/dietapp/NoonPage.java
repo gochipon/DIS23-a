@@ -21,7 +21,7 @@ public class NoonPage extends AppCompatActivity {
 
     private ImageView imageView;
     private Button buttonComplete, buttonRetake;
-    private Bitmap currentBitmap = null;
+    public static Bitmap currentBitmapNoon = null;
     private String saveImageToInternalStorage(Bitmap bitmap) {
         try {
             String filename = "Noon.jpg";
@@ -45,8 +45,8 @@ public class NoonPage extends AppCompatActivity {
         buttonRetake = findViewById(R.id.button_retake);
 
         buttonComplete.setOnClickListener(v -> {
-            if (currentBitmap != null) {
-                String savedFilename = saveImageToInternalStorage(currentBitmap);
+            if (currentBitmapNoon != null) {
+                String savedFilename = saveImageToInternalStorage(currentBitmapNoon);
                 if (savedFilename != null) {
                     Log.d("debug", "Image saved as: " + savedFilename);
                 } else {
@@ -79,14 +79,14 @@ public class NoonPage extends AppCompatActivity {
                 if (result.getResultCode() == Activity.RESULT_OK) {
                     Intent data = result.getData();
                     if (data != null) {
-                        currentBitmap = (Bitmap) data.getExtras().get("data");
-                        if (currentBitmap != null) {
-                            int bmpWidth = currentBitmap.getWidth();
-                            int bmpHeight = currentBitmap.getHeight();
+                        currentBitmapNoon = (Bitmap) data.getExtras().get("data");
+                        if (currentBitmapNoon != null) {
+                            int bmpWidth = currentBitmapNoon.getWidth();
+                            int bmpHeight = currentBitmapNoon.getHeight();
                             Log.d("debug", "Width: " + bmpWidth);
                             Log.d("debug", "Height: " + bmpHeight);
 
-                            imageView.setImageBitmap(currentBitmap);
+                            imageView.setImageBitmap(currentBitmapNoon);
 
                             // Show the Complete and Retake buttons
                             buttonComplete.setVisibility(View.VISIBLE);

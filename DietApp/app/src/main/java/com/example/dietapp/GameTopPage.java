@@ -1,5 +1,9 @@
 package com.example.dietapp;
 
+import static com.example.dietapp.MorningPage.currentBitmapMorning;
+import static com.example.dietapp.NightPage.currentBitmapNight;
+import static com.example.dietapp.NoonPage.currentBitmapNoon;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -58,7 +62,6 @@ public class GameTopPage extends AppCompatActivity {
             FileInputStream fis = openFileInput("Morning.jpg");
             Bitmap savedBitmap = BitmapFactory.decodeStream(fis);
             fis.close();
-            // Now you can use the savedBitmap to display the image
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -70,9 +73,15 @@ public class GameTopPage extends AppCompatActivity {
         ImageView noonImageView = findViewById(R.id.noonImageView);
         ImageView nightImageView = findViewById(R.id.nightImageView);
 
-        morningImageView.setImageBitmap(loadedImage);
-        noonImageView.setImageBitmap(loadedImage);
-        nightImageView.setImageBitmap(loadedImage);
+//        morningImageView.setImageBitmap(loadedImage);
+        morningImageView.setImageBitmap(currentBitmapMorning);
+        noonImageView.setImageBitmap(currentBitmapNoon);
+        nightImageView.setImageBitmap(currentBitmapNight);
+
+
+
+//        MorningPage morningPage = new MorningPage();
+//        Bitmap savedImage = morningPage.getSavedImage();
     }
 
     // PictureInputページへの遷移処理

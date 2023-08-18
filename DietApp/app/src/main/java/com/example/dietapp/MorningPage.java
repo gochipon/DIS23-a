@@ -5,14 +5,20 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.app.Activity;
+import android.content.Context;
+import android.content.ContextWrapper;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import android.graphics.Bitmap;
 
@@ -21,7 +27,7 @@ public class MorningPage extends AppCompatActivity {
 
     private ImageView imageView;
     private Button buttonComplete, buttonRetake;
-    private Bitmap currentBitmap = null;
+    public static Bitmap currentBitmapMorning = null;
     private String saveImageToInternalStorage(Bitmap bitmap) {
         try {
             String filename = "Morning.jpg";
@@ -46,14 +52,26 @@ public class MorningPage extends AppCompatActivity {
 
         buttonComplete.setOnClickListener(v -> {
             Log.d("debug", "picture");
-            if (currentBitmap != null) {
-                String savedFilename = saveImageToInternalStorage(currentBitmap);
+            if (currentBitmapMorning != null) {
+                String savedFilename = saveImageToInternalStorage(currentBitmapMorning);
                 if (savedFilename != null) {
                     Log.d("debug", "Image saved as: " + savedFilename);
                 } else {
                     Log.e("debug", "Error saving image.");
                 }
             }
+//            try {
+//                String filename = "Morning.jpg"; // 保存したファイル名
+//                FileInputStream fis = openFileInput(filename);
+//                Bitmap bitmap = BitmapFactory.decodeStream(fis);
+//                fis.close();
+//
+////                ImageView imageView = findViewById(R.id.imageView); // ImageView のインスタンスを取得
+////                imageView.setImageBitmap(bitmap); // 読み込んだ Bitmap を設定
+//            } catch (Exception e) {
+//                e.printStackTrace();
+//            }
+
             // Go back to GameTopPage
             Intent intent = new Intent(MorningPage.this, GameTopPage.class);
             startActivity(intent);
@@ -80,14 +98,14 @@ public class MorningPage extends AppCompatActivity {
                 if (result.getResultCode() == Activity.RESULT_OK) {
                     Intent data = result.getData();
                     if (data != null) {
-                        currentBitmap = (Bitmap) data.getExtras().get("data");
-                        if (currentBitmap != null) {
-                            int bmpWidth = currentBitmap.getWidth();
-                            int bmpHeight = currentBitmap.getHeight();
+                        currentBitmapMorning = (Bitmap) data.getExtras().get("data");
+                        if (currentBitmapMorning != null) {
+                            int bmpWidth = currentBitmapMorning.getWidth();
+                            int bmpHeight = currentBitmapMorning.getHeight();
                             Log.d("debug", "Width: " + bmpWidth);
                             Log.d("debug", "Height: " + bmpHeight);
 
-                            imageView.setImageBitmap(currentBitmap);
+                            imageView.setImageBitmap(currentBitmapMorning);
 
                             // Show the Complete and Retake buttons
                             buttonComplete.setVisibility(View.VISIBLE);
@@ -96,4 +114,16 @@ public class MorningPage extends AppCompatActivity {
                     }
                 }
             });
+    public Bitmap getSavedImage() {
+        try {
+            String filename = "Morning.jpg";
+            FileInputStream fis = openFileInput(filename);
+            Bitmap bitmap = BitmapFactory.decodeStream(fis);
+            fis.close();
+            return bitmap;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
 }
