@@ -109,20 +109,5 @@
             android:text="目標を設定"
             android:layout_gravity="center_horizontal" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="次に、目標体重と目標期間を設定しよう！"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
-
-        <Button
-            android:id="@+id/goToGoalSettingButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="目標を設定"
-            android:layout_gravity="center_horizontal|bottom" />
-
     </LinearLayout>
 </ScrollView>

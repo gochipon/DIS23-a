@@ -2,32 +2,19 @@ package com.example.dietapp;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.view.View;
-
-import androidx.core.view.WindowCompat;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-
-import com.example.dietapp.databinding.ActivityMainBinding;
-
-import android.view.Menu;
-import android.view.MenuItem;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import com.example.dietapp.databinding.ActivityMainBinding;
 
 public class MainActivity extends AppCompatActivity {
 
-    private AppBarConfiguration appBarConfiguration;
     private ActivityMainBinding binding;
 
     public EditText weightEditText;
@@ -36,7 +23,6 @@ public class MainActivity extends AppCompatActivity {
     public static int age;
     public static float height;
     public static float weight;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,15 +33,7 @@ public class MainActivity extends AppCompatActivity {
 
         weightEditText = binding.weightEditText;
         heightEditText = binding.heightEditText;
-        ageEditText    = binding.ageEditText;
-        String ageString = ageEditText.getText().toString();
-        String weightString = weightEditText.getText().toString();
-        String heightString = heightEditText.getText().toString();
-        age = Integer.parseInt(ageString);
-        height = Float.parseFloat(ageString);
-        weight = Float.parseFloat(ageString);
-
-        final TextView genderHint = findViewById(R.id.genderHint);
+        ageEditText = binding.ageEditText;
 
         Spinner genderSpinner = findViewById(R.id.genderSpinner);
         genderSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -87,19 +65,26 @@ public class MainActivity extends AppCompatActivity {
         goToGoalSettingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GoalSetting.class);
-                startActivity(intent);
-            }
-        });
+                try {
+                    String ageString = ageEditText.getText().toString();
+                    String weightString = weightEditText.getText().toString();
+                    String heightString = heightEditText.getText().toString();
 
-        Button goToGoalSettingButton = findViewById(R.id.goToGoalSettingButton);
-        goToGoalSettingButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, GoalSetting.class);
-                startActivity(intent);
+                    if (ageString.isEmpty() || weightString.isEmpty() || heightString.isEmpty()) {
+                        Toast.makeText(MainActivity.this, "すべての項目を入力してください。", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
+                    age = Integer.parseInt(ageString);
+                    height = Float.parseFloat(heightString);
+                    weight = Float.parseFloat(weightString);
+
+                    Intent intent = new Intent(MainActivity.this, GoalSetting.class);
+                    startActivity(intent);
+                } catch (NumberFormatException e) {
+                    Toast.makeText(MainActivity.this, "正しい値を入力してください。", Toast.LENGTH_SHORT).show();
+                }
             }
         });
     }
-
 }
