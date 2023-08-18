@@ -14,7 +14,7 @@ def generate_image(prompt):
         model="image-alpha-001",
         prompt=prompt,
         n=1,
-        size="512x512",
+        size="1024x1024",
         response_format="url"
     )
     return response['data'][0]['url']

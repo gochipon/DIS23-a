@@ -24,6 +24,7 @@ import java.io.IOException;
 
 public class MakeCharacter extends AppCompatActivity {
     public static Character character;
+    private String imageUrl;
     Spinner characterTypeSpinner, characterTraitSpinner, characterAppearanceSpinner;
     Button btnSubmit;  // 追加
     private final OkHttpClient client = new OkHttpClient();
@@ -58,9 +59,16 @@ public class MakeCharacter extends AppCompatActivity {
                     String responseString = response.body().string();
                     try {
                         JSONObject jsonResponse = new JSONObject(responseString);
-                        String imageUrl = jsonResponse.getString("image_url");
+                        imageUrl = jsonResponse.getString("image_url");
                         // ここで出力画像を表示するメソッドを呼び出す
                         displayImage(imageUrl);
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                // UIの変更をここで行う
+                                btnSubmit.setVisibility(View.VISIBLE);
+                            }
+                        });
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -94,9 +102,6 @@ public class MakeCharacter extends AppCompatActivity {
             String trait = characterTraitSpinner.getSelectedItem().toString();
             String appearance = characterAppearanceSpinner.getSelectedItem().toString();
             callGenerateAPI(type, trait, appearance);
-
-            // キャラクター生成後、btnSubmitボタンを表示する
-            btnSubmit.setVisibility(View.VISIBLE);
         });
         // btnSubmitボタンのクリックリスナーを設定
         Button goToGameTopPageButton = findViewById(R.id.btnSubmit);
@@ -114,8 +119,7 @@ public class MakeCharacter extends AppCompatActivity {
         String type = characterTypeSpinner.getSelectedItem().toString();
         String trait = characterTraitSpinner.getSelectedItem().toString();
         String appearance = characterAppearanceSpinner.getSelectedItem().toString();
-
-        character = new Character(type, trait, appearance);
+        character = new Character(type, trait, appearance, imageUrl);
 
         return character;
     }

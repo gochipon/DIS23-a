@@ -45,17 +45,28 @@ public class MorningPage extends AppCompatActivity {
     private OkHttpClient client = new OkHttpClient();
     private String saveImageToInternalStorage(Bitmap bitmap) {
         try {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            // ディレクトリのパスを作成します。この例では "imageDir" という名前のディレクトリを作成します。
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
             String filename = "Morning.jpg";
-            FileOutputStream fos = openFileOutput(filename, MODE_PRIVATE);
+            File path = new File(directory, filename);
+
+            FileOutputStream fos = new FileOutputStream(path);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.close();
-            return filename;
+            return path.getAbsolutePath();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-    private void sendImageToServer(Bitmap bitmap) {
+    private void sendImageToServer(String imagePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+        if(bitmap == null) {
+            Log.e("debug", "Failed to decode the image from path: " + imagePath);
+            return;
+        }
         String url = "http://10.0.2.2:8080/predict-food";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -105,7 +116,7 @@ public class MorningPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_picture_input);
+        setContentView(R.layout.activity_morning_page);
 
         imageView = findViewById(R.id.image_view);
         buttonComplete = findViewById(R.id.button_complete);
@@ -114,16 +125,16 @@ public class MorningPage extends AppCompatActivity {
         buttonComplete.setOnClickListener(v -> {
             Log.d("debug", "picture");
             if (currentBitmapMorning != null) {
-                String savedFilename = saveImageToInternalStorage(currentBitmapMorning);
+                String savedImagePath = saveImageToInternalStorage(currentBitmapMorning);
 
-                if (savedFilename != null) {
-                    Log.d("debug", "Image saved as: " + savedFilename);
+                if (savedImagePath != null) {
+                    Log.d("debug", "Image saved at: " + savedImagePath);
+
+                    // 保存された画像のパスをsendImageToServer関数に渡します。
+                    sendImageToServer(savedImagePath);
                 } else {
                     Log.e("debug", "Error saving image.");
                 }
-
-                // 画像をAPIに投げる
-                sendImageToServer(currentBitmapMorning);
             }
 
             // Go back to GameTopPage
@@ -156,10 +167,6 @@ public class MorningPage extends AppCompatActivity {
                         currentBitmapMorning = (Bitmap) data.getExtras().get("data");
                         if (currentBitmapMorning != null) {
                             currentBitmapMorning = Bitmap.createScaledBitmap(currentBitmapMorning, 224, 224, true);
-                            int bmpWidth = currentBitmapMorning.getWidth();
-                            int bmpHeight = currentBitmapMorning.getHeight();
-                            Log.d("debug", "Width: " + bmpWidth);
-                            Log.d("debug", "Height: " + bmpHeight);
 
                             imageView.setImageBitmap(currentBitmapMorning);
 
@@ -170,16 +177,4 @@ public class MorningPage extends AppCompatActivity {
                     }
                 }
             });
-    public Bitmap getSavedImage() {
-        try {
-            String filename = "Morning.jpg";
-            FileInputStream fis = openFileInput(filename);
-            Bitmap bitmap = BitmapFactory.decodeStream(fis);
-            fis.close();
-            return bitmap;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return null;
-        }
-    }
 }
