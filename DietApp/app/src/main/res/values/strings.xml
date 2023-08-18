@@ -12,5 +12,6 @@
         <item>普通</item>
         <item>高い</item>
     </string-array>
-
+    <string name="button">Button</string>
+    <string name="description">camera picture</string>
 </resources>

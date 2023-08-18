@@ -36,7 +36,7 @@
       app:layout_constraintTop_toBottomOf="@id/usernameTextView"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintBottom_toTopOf="@id/morningTextView"
+      app:layout_constraintBottom_toTopOf="@id/morningButton"
       app:layout_constraintVertical_bias="0.4"
       android:layout_marginTop="40dp"
       />
@@ -54,9 +54,9 @@
       app:layout_constraintRight_toRightOf="@id/testImageView"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="@id/testImageView" />
-  <!-- 朝, 昼, 夜のテキストボックス -->
-  <TextView
-      android:id="@+id/morningTextView"
+  <!-- 朝, 昼, 夜のボタン -->
+  <Button
+      android:id="@+id/morningButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="朝"
@@ -65,12 +65,12 @@
       android:background="@drawable/bordered_background"
       android:padding="10dp"
       app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toLeftOf="@id/noonTextView"
+      app:layout_constraintRight_toLeftOf="@id/noonButton"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintHorizontal_chainStyle="spread" />
 
-  <TextView
-      android:id="@+id/noonTextView"
+  <Button
+      android:id="@+id/noonButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="昼"
@@ -78,12 +78,12 @@
       android:gravity="center"
       android:background="@drawable/bordered_background"
       android:padding="10dp"
-      app:layout_constraintLeft_toRightOf="@id/morningTextView"
-      app:layout_constraintRight_toLeftOf="@id/nightTextView"
+      app:layout_constraintLeft_toRightOf="@id/morningButton"
+      app:layout_constraintRight_toLeftOf="@id/nightButton"
       app:layout_constraintBottom_toBottomOf="parent" />
 
-  <TextView
-      android:id="@+id/nightTextView"
+  <Button
+      android:id="@+id/nightButton"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
       android:text="夜"
@@ -91,9 +91,8 @@
       android:gravity="center"
       android:background="@drawable/bordered_background"
       android:padding="10dp"
-      app:layout_constraintLeft_toRightOf="@id/noonTextView"
+      app:layout_constraintLeft_toRightOf="@id/noonButton"
       app:layout_constraintRight_toRightOf="parent"
       app:layout_constraintBottom_toBottomOf="parent" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
