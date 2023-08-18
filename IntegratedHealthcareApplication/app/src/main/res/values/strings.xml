@@ -7,6 +7,18 @@
     <string name="next">Next</string>
     <string name="previous">Previous</string>
 
+    <string-array name="gender_array">
+        <item>男性</item>
+        <item>女性</item>
+        <item>その他</item>
+    </string-array>
+
+    <string-array name="activity_level_array">
+        <item>低い</item>
+        <item>普通</item>
+        <item>高い</item>
+    </string-array>
+
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
         volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
