@@ -105,7 +105,7 @@ def translate_to_english(japanese_input):
     return translation_dict.get(japanese_input, japanese_input)
 
 def create_prompt(character_type, character_traits, appearance_attributes=None, special_features=None):
-    prompt = "high quality, deatailed, beautiful, anime style picture of face and upper body of a" + translate_to_english(character_type) + "character"
+    prompt = "high quality, deatailed, beautifu, anime style picture of face and upper body of a" + translate_to_english(character_type) + "character"
 
     if character_traits:
         traits_in_english = [translate_to_english(trait) for trait in character_traits]
