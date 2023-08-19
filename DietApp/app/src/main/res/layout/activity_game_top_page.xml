@@ -17,7 +17,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="ユーザー名"
-          android:textSize="24sp"
+          android:textSize="48dp"
           android:textStyle="bold"
           android:clickable="true"
           android:focusable="true"
@@ -26,17 +26,14 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent" />
 
-
       <!-- Custom SeekBar with label on top -->
-
-
       <SeekBar
           android:id="@+id/customSeekBar"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:max="100"
           android:progress="50"
-          android:progressDrawable="@drawable/custom_seekbar_background"
+          android:progressDrawable="@drawable/seekbar_style"
           android:thumb="@android:color/transparent"
           app:layout_constraintTop_toBottomOf="@id/usernameTextView" />
 
@@ -45,7 +42,7 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:text="今日の残り摂取可能カロリー"
-          android:textColor="#000"
+          android:textColor="#ffffff"
           app:layout_constraintStart_toStartOf="@+id/customSeekBar"
           app:layout_constraintTop_toTopOf="@+id/customSeekBar"
           app:layout_constraintEnd_toEndOf="@+id/customSeekBar"
@@ -64,6 +61,15 @@
           android:layout_marginTop="8dp"
           tools:ignore="MissingConstraints" />
 
+      <TextView
+          android:id="@+id/reloadText"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="ミールメイトをタップするとアドバイスが更新されるよ"
+          android:layout_marginBottom="4dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/borderedTextView" />
+
       <!-- 中心の画像 -->
       <ImageView
           android:id="@+id/testImageView"
@@ -74,20 +80,22 @@
           android:clickable="true"
           android:focusable="true"
           android:onClick="handleImageClick"
-          app:layout_constraintTop_toBottomOf="@id/borderedTextView"
+          app:layout_constraintTop_toBottomOf="@id/reloadText"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintVertical_bias="0.4"
           android:layout_marginTop="4dp"
           android:layout_marginBottom="4dp" />
 
+
+
       <!-- 朝のボタン -->
       <Button
           android:id="@+id/morningButton"
           android:layout_width="100dp"
-          android:layout_height="wrap_content"
+          android:layout_height="50dp"
           android:text="朝"
-          android:textSize="30sp"
+          android:textSize="24sp"
           android:gravity="center"
           android:background="@drawable/bordered_background"
           android:padding="5dp"
@@ -108,9 +116,9 @@
       <Button
           android:id="@+id/noonButton"
           android:layout_width="100dp"
-          android:layout_height="wrap_content"
+          android:layout_height="50dp"
           android:text="昼"
-          android:textSize="30sp"
+          android:textSize="24sp"
           android:gravity="center"
           android:background="@drawable/bordered_background"
           android:padding="5dp"
@@ -131,9 +139,9 @@
       <Button
           android:id="@+id/nightButton"
           android:layout_width="100dp"
-          android:layout_height="wrap_content"
+          android:layout_height="50dp"
           android:text="夜"
-          android:textSize="30sp"
+          android:textSize="24sp"
           android:gravity="center"
           android:background="@drawable/bordered_background"
           android:padding="5dp"
@@ -157,12 +165,12 @@
           android:layout_height="wrap_content"
           android:text="体重を入力する！"
           android:textSize="18sp"
-          android:layout_marginTop="16dp"
+          android:layout_marginTop="80dp"
           android:background="@drawable/bordered_background"
           android:padding="5dp"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintEnd_toEndOf="parent"
-          app:layout_constraintTop_toBottomOf="@id/nightImageView"
+          app:layout_constraintTop_toBottomOf="@id/nightButton"
           app:layout_constraintWidth_percent="0.5"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>

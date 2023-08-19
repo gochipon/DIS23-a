@@ -11,6 +11,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -69,10 +70,15 @@ public class GameTopPage extends AppCompatActivity {
         }
         float target_calories;
         float calories_ate;
-        target_calories = 7700 * (goal.getTargetWeight()-user.getWeight()) / (goal.getTargetDuration());
+        float calculatedCalories = tdee - (7700 * (user.getWeight() - goal.getTargetWeight()) / goal.getTargetDuration());
+        target_calories = Math.max(calculatedCalories, 1500);
+
         calories_ate = Food.getBreakfastCalories() + Food.getLunchCalories() + Food.getDinnerCalories();
+
         float difference = target_calories - calories_ate;
         int progress = (int) ((difference / target_calories) * 100);
+        Log.d("debug", "Progress: " + progress + ", Calories Ate: " + calories_ate + ", Target Calories: " + target_calories);
+
         SeekBar customSeekBar = findViewById(R.id.customSeekBar);
         customSeekBar.setOnTouchListener((v, event) -> true);
         customSeekBar.setProgress(progress);
