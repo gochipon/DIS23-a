@@ -11,6 +11,7 @@
       android:layout_height="wrap_content"
       android:padding="16dp">
 
+
       <!-- ユーザー名表示 -->
       <TextView
           android:id="@+id/usernameTextView"
@@ -80,6 +81,19 @@
           app:layout_constraintVertical_bias="0.4"
           android:layout_marginTop="4dp"
           android:layout_marginBottom="4dp" />
+
+      <TextView
+          android:id="@+id/dayTextView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="Day 1: 目標まであとkg！"
+          android:textSize="24sp"
+          android:textStyle="bold"
+          android:background="#FFFFFF"
+          app:layout_constraintBottom_toTopOf="@+id/noonButton"
+          app:layout_constraintStart_toStartOf="@+id/noonButton"
+          app:layout_constraintEnd_toEndOf="@+id/noonButton" />
+
 
       <!-- 朝のボタン -->
       <Button
@@ -155,7 +169,7 @@
           android:id="@+id/weightInputButton"
           android:layout_width="0dp"
           android:layout_height="wrap_content"
-          android:text="体重を入力する！"
+          android:text="今日の体重を入力！"
           android:textSize="18sp"
           android:layout_marginTop="16dp"
           android:background="@drawable/bordered_background"

@@ -26,6 +26,7 @@ import org.json.JSONObject;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Locale;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -38,6 +39,9 @@ import okhttp3.Response;
 
 public class GameTopPage extends AppCompatActivity {
     private OkHttpClient client = new OkHttpClient();
+    Button weightInputButton;
+    private TextView dayTextView;
+
     private void displayImage(String imageUrl) {
         runOnUiThread(() -> {
             ImageView imageView = findViewById(R.id.testImageView); // 画像を置き換えたいImageViewのID
@@ -142,6 +146,27 @@ public class GameTopPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
 
+
+        dayTextView = findViewById(R.id.dayTextView);
+
+        updateDayTextView();
+
+
+        // ButtonをIDを使って取得
+        weightInputButton = findViewById(R.id.weightInputButton);
+
+        // Buttonのクリックリスナーを設定
+        weightInputButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // WeightUpdateのアクティビティへのインテントを作成
+                Intent intent = new Intent(GameTopPage.this, WeightUpdate.class);
+
+                // アクティビティを開始
+                startActivity(intent);
+            }
+        });
+
         // characterオブジェクトから画像URLを取得して、displayImage関数で画像を置き換えます
         String imageUrl = character.getImageUrl();
         displayImage(imageUrl);
@@ -221,6 +246,18 @@ public class GameTopPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private void updateDayTextView() {
+        float weight = user.getWeight();
+        int day = goal.getDay();
+        float targetWeight = goal.getTargetWeight();
+
+        float weightLeft = weight - targetWeight;
+
+        // TextViewのテキストを更新
+        String updatedText = String.format(Locale.JAPAN, "Day %d: 目標まであと%.2f kg!", day, weightLeft);
+        dayTextView.setText(updatedText);
     }
 
     // PictureInputページへの遷移処理

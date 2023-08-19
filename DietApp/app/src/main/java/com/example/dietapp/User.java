@@ -37,7 +37,7 @@ public class User {
         return activityLevel;
     }
 
-    public static void setWeight(String username) {
+    public static void setWeight(Float weight) {
         User.weight = weight;
     }
 }
