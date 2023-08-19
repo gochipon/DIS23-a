@@ -1,5 +1,7 @@
 package com.example.dietapp;
 
+import static com.example.dietapp.GoalSetting.food;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -33,6 +35,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
 import android.graphics.Bitmap;
 
 public class NoonPage extends AppCompatActivity {
@@ -43,17 +46,28 @@ public class NoonPage extends AppCompatActivity {
     private OkHttpClient client = new OkHttpClient();
     private String saveImageToInternalStorage(Bitmap bitmap) {
         try {
+            ContextWrapper cw = new ContextWrapper(getApplicationContext());
+            // ディレクトリのパスを作成します。この例では "imageDir" という名前のディレクトリを作成します。
+            File directory = cw.getDir("imageDir", Context.MODE_PRIVATE);
             String filename = "Noon.jpg";
-            FileOutputStream fos = openFileOutput(filename, MODE_PRIVATE);
+            File path = new File(directory, filename);
+
+            FileOutputStream fos = new FileOutputStream(path);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.close();
-            return filename;
+            return path.getAbsolutePath();
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
     }
-    private void sendImageToServer(Bitmap bitmap) {
+    private void sendImageToServer(String imagePath) {
+        Bitmap bitmap = BitmapFactory.decodeFile(imagePath);
+
+        if(bitmap == null) {
+            Log.e("debug", "Failed to decode the image from path: " + imagePath);
+            return;
+        }
         String url = "http://10.0.2.2:8080/predict-food";
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, stream);
@@ -86,11 +100,11 @@ public class NoonPage extends AppCompatActivity {
                     String responseString = response.body().string();
                     try {
                         JSONObject jsonResponse = new JSONObject(responseString);
-                        String food = jsonResponse.getString("food");
+                        String food_name = jsonResponse.getString("food");
                         int calories_ate = jsonResponse.getInt("calories_ate");
-
+                        food.setLunch(food_name, calories_ate);
                         // 以下、受け取ったデータを使用した処理
-                        Log.d("API_RESPONSE", "Food: " + food + ", Calories: " + calories_ate);
+                        Log.d("API_RESPONSE", "Food: " + food_name + ", Calories: " + calories_ate);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -109,14 +123,15 @@ public class NoonPage extends AppCompatActivity {
 
         buttonComplete.setOnClickListener(v -> {
             if (currentBitmapNoon != null) {
-                String savedFilename = saveImageToInternalStorage(currentBitmapNoon);
-                if (savedFilename != null) {
-                    Log.d("debug", "Image saved as: " + savedFilename);
+                String savedImagePath = saveImageToInternalStorage(currentBitmapNoon);
+                if (savedImagePath != null) {
+                    Log.d("debug", "Image saved at: " + savedImagePath);
+
+                    // 保存された画像のパスをsendImageToServer関数に渡します。
+                    sendImageToServer(savedImagePath);
                 } else {
                     Log.e("debug", "Error saving image.");
                 }
-                // 画像をAPIに投げる
-                sendImageToServer(currentBitmapNoon);
             }
             // Go back to GameTopPage
             Intent intent = new Intent(NoonPage.this, GameTopPage.class);
@@ -144,7 +159,11 @@ public class NoonPage extends AppCompatActivity {
                 if (result.getResultCode() == Activity.RESULT_OK) {
                     Intent data = result.getData();
                     if (data != null) {
-                        currentBitmapNoon = (Bitmap) data.getExtras().get("data");
+//                        currentBitmapNoon = (Bitmap) data.getExtras().get("data");
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                        currentBitmapNoon = BitmapFactory.decodeResource(getResources(), R.drawable.ramen, options);
+
                         if (currentBitmapNoon != null) {
                             currentBitmapNoon = Bitmap.createScaledBitmap(currentBitmapNoon, 224, 224, true);
 

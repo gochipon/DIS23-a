@@ -142,9 +142,6 @@ public class GameTopPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
 
-        //アドバイスを更新
-        getDietAdvice();
-
         // characterオブジェクトから画像URLを取得して、displayImage関数で画像を置き換えます
         String imageUrl = character.getImageUrl();
         displayImage(imageUrl);
@@ -154,6 +151,16 @@ public class GameTopPage extends AppCompatActivity {
 
         // TextViewに文字列をセット
         myTextView.setText(user.getUsername());
+
+        getDietAdvice();
+        ImageView testImageView = findViewById(R.id.testImageView);
+        testImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getDietAdvice();
+            }
+        });
+
 
         // 各ボタンのリスナーをセット
         morningButton = findViewById(R.id.morningButton);

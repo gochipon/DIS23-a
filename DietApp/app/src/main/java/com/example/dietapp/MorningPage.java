@@ -1,5 +1,7 @@
 package com.example.dietapp;
 
+import static com.example.dietapp.GoalSetting.food;
+
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +37,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 
 import android.graphics.Bitmap;
-
 
 public class MorningPage extends AppCompatActivity {
 
@@ -99,11 +100,11 @@ public class MorningPage extends AppCompatActivity {
                     String responseString = response.body().string();
                     try {
                         JSONObject jsonResponse = new JSONObject(responseString);
-                        String food = jsonResponse.getString("food");
-                        int calories_ate = jsonResponse.getInt("calories_ate");
-
+                        String food_name = jsonResponse.getString("food");
+                        float calories_ate = jsonResponse.getInt("calories_ate");
+                        food.setBreakfast(food_name, calories_ate);
                         // 以下、受け取ったデータを使用した処理
-                        Log.d("API_RESPONSE", "Food: " + food + ", Calories: " + calories_ate);
+                        Log.d("API_RESPONSE", "Food: " + food_name + ", Calories: " + calories_ate);
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -111,8 +112,6 @@ public class MorningPage extends AppCompatActivity {
             }
         });
     }
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -164,7 +163,11 @@ public class MorningPage extends AppCompatActivity {
                 if (result.getResultCode() == Activity.RESULT_OK) {
                     Intent data = result.getData();
                     if (data != null) {
-                        currentBitmapMorning = (Bitmap) data.getExtras().get("data");
+//                        currentBitmapMorning = (Bitmap) data.getExtras().get("data");
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                        currentBitmapMorning = BitmapFactory.decodeResource(getResources(), R.drawable.french_toast, options);
+
                         if (currentBitmapMorning != null) {
                             currentBitmapMorning = Bitmap.createScaledBitmap(currentBitmapMorning, 224, 224, true);
 
