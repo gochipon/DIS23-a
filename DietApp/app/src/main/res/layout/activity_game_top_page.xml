@@ -27,24 +27,29 @@
           app:layout_constraintEnd_toEndOf="parent" />
 
 
+      <!-- Custom SeekBar with label on top -->
+
+
       <SeekBar
           android:id="@+id/customSeekBar"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:max="100"
           android:progress="50"
+          android:progressDrawable="@drawable/custom_seekbar_background"
           android:thumb="@android:color/transparent"
           app:layout_constraintTop_toBottomOf="@id/usernameTextView" />
 
       <TextView
-          android:id="@+id/customSeekBarLabel"
+          android:id="@+id/seekBarText"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:text="残り消費可能カロリー"
-          android:textSize="12sp"
-          app:layout_constraintTop_toBottomOf="@id/customSeekBar"
-          app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintEnd_toEndOf="parent"/>
+          android:text="今日の残り摂取可能カロリー"
+          android:textColor="#000"
+          app:layout_constraintStart_toStartOf="@+id/customSeekBar"
+          app:layout_constraintTop_toTopOf="@+id/customSeekBar"
+          app:layout_constraintEnd_toEndOf="@+id/customSeekBar"
+          app:layout_constraintBottom_toBottomOf="@+id/customSeekBar" />
 
       <!-- 吹き出しテキスト -->
       <TextView
@@ -55,7 +60,7 @@
           android:textSize="16sp"
           android:background="@drawable/bordered_background"
           android:padding="5dp"
-          app:layout_constraintTop_toBottomOf="@id/customSeekBarLabel"
+          app:layout_constraintTop_toBottomOf="@id/customSeekBar"
           android:layout_marginTop="8dp"
           tools:ignore="MissingConstraints" />
 
@@ -144,6 +149,21 @@
           app:layout_constraintTop_toBottomOf="@id/nightButton"
           app:layout_constraintLeft_toLeftOf="@id/nightButton"
           app:layout_constraintRight_toRightOf="@id/nightButton" />
+
+      <!-- 体重を入力するボタン -->
+      <Button
+          android:id="@+id/weightInputButton"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:text="体重を入力する！"
+          android:textSize="18sp"
+          android:layout_marginTop="16dp"
+          android:background="@drawable/bordered_background"
+          android:padding="5dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/nightImageView"
+          app:layout_constraintWidth_percent="0.5"/>
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -52,7 +52,7 @@ def predictFood(bitmap):
     return classes[predicted_index]
 
 def load_config():
-    with open("../config.json", "r") as file:
+    with open("./config.json", "r") as file:
         config = json.load(file)
     return config
 
@@ -82,6 +82,9 @@ def get_calories_for_dish(dish_name, app_id=food_app_id, app_key=food_app_key):
     # If there's an error or unexpected structure
     raise ValueError(f"Could not find calorie data for {dish_name}")
 
+# path_to_image = "/home/hirokisawada/Desktop/CurryRice.png"
+# predictedFood = predictFood(path_to_image)
+# get_calories_for_dish(predictedFood)
 # from PIL import Image
 
 # # 画像を読み込む
