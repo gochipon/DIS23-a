@@ -48,8 +48,8 @@ public class GoalSetting extends AppCompatActivity {
     private Goal saveGoalInfo() {
         float targetWeight = Float.parseFloat(targetWeightEditText.getText().toString());
         float targetDuration = Float.parseFloat(targetDurationEditText.getText().toString());
-
-        goal = new Goal(targetWeight, targetDuration);
+        int day = 1;
+        goal = new Goal(targetWeight, targetDuration, day);
 
         return goal;
     }
