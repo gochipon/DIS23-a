@@ -11,7 +11,6 @@
       android:layout_height="wrap_content"
       android:padding="16dp">
 
-
       <!-- ユーザー名表示 -->
       <TextView
           android:id="@+id/usernameTextView"
@@ -184,6 +183,40 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintTop_toBottomOf="@id/nightButton"
           app:layout_constraintWidth_percent="0.5"/>
+
+      <!-- 朝のカロリー表示 -->
+      <TextView
+          android:id="@+id/morningCaloriesTextView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:text=" "
+          android:gravity="center"
+          app:layout_constraintTop_toBottomOf="@id/morningImageView"
+          app:layout_constraintLeft_toLeftOf="@id/morningButton"
+          app:layout_constraintRight_toRightOf="@id/morningButton" />
+
+      <!-- 昼のカロリー表示 -->
+      <TextView
+          android:id="@+id/noonCaloriesTextView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:text=" "
+          android:gravity="center"
+          app:layout_constraintTop_toBottomOf="@id/noonImageView"
+          app:layout_constraintLeft_toLeftOf="@id/noonButton"
+          app:layout_constraintRight_toRightOf="@id/noonButton" />
+
+      <!-- 夜のカロリー表示 -->
+      <TextView
+          android:id="@+id/nightCaloriesTextView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:text=" "
+          android:gravity="center"
+          app:layout_constraintTop_toBottomOf="@id/nightImageView"
+          app:layout_constraintLeft_toLeftOf="@id/nightButton"
+          app:layout_constraintRight_toRightOf="@id/nightButton" />
+
 
   </androidx.constraintlayout.widget.ConstraintLayout>
 
