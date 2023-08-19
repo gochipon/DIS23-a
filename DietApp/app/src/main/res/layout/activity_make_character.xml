@@ -11,9 +11,28 @@
         android:gravity="center">
 
         <TextView
+            android:id="@+id/titleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ミールメイトの生成"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- 説明文を追加 -->
+        <TextView
+            android:id="@+id/descriptionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="ミールメイトは、あなたのダイエットの応援者として、適切なアドバイスやモチベーションのサポートをしてくれる存在となります。\n性格や特徴を選択し、自分だけのミールメイトをカスタマイズ！\n生成ボタンを押すことで、何度でもキャラの生成をやり直せます。\n気に入ったミールメイトができたら、一緒に健康な生活を目指しましょう。"
+            android:textSize="12sp"
+            android:layout_marginBottom="16dp" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="キャラの種類を選択:"
+            android:text="ミールメイトを選択:"
             android:layout_marginBottom="4dp" />
 
         <Spinner
@@ -26,7 +45,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="キャラの性格を選択:"
+            android:text="ミールメイトの性格を選択:"
             android:layout_marginBottom="4dp" />
 
         <Spinner
@@ -39,7 +58,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="外見特徴を選択:"
+            android:text="外見特徴を選択:（プレミアムプランで複数選択可）"
             android:layout_marginBottom="4dp" />
 
         <Spinner
@@ -59,13 +78,13 @@
             android:id="@+id/characterImageView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:scaleType="centerInside" /> <!-- この属性を追加 -->
+            android:scaleType="centerInside" />
 
         <Button
             android:id="@+id/btnSubmit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="完了"
+            android:text="このキャラと共にダイエットを始める"
             android:visibility="gone" />
 
     </LinearLayout>
