@@ -13,16 +13,18 @@ public class Food {
     private static Bitmap lunch_picture;
     private static Bitmap dinner_picture;
     // コンストラクタ
-    public Food(String breakfast_name, String lunch_name, String dinner_name, float breakfast_calories, float lunch_calories, float dinner_calories, Bitmap breakfast_picture, Bitmap lunch_picture, Bitmap dinner_picture) {
+    public Food(String breakfast_name, String lunch_name, String dinner_name, float breakfast_calories, float lunch_calories, float dinner_calories
+                //Bitmap breakfast_picture=None, Bitmap lunch_picture=None, Bitmap dinner_picture=None) {
+                ){
         this.breakfast_name = breakfast_name;
         this.lunch_name = lunch_name;
         this.dinner_name = dinner_name;
         this.breakfast_calories = breakfast_calories;
         this.lunch_calories = lunch_calories;
         this.dinner_calories = dinner_calories;
-        this.breakfast_picture = breakfast_picture;
-        this.lunch_picture = lunch_picture;
-        this.dinner_picture = dinner_picture;
+//        this.breakfast_picture = breakfast_picture;
+//        this.lunch_picture = lunch_picture;
+//        this.dinner_picture = dinner_picture;
     }
     // ゲッター
     public static String getBreakfastName() {
@@ -43,28 +45,28 @@ public class Food {
     public static float getDinnerCalories() {
         return dinner_calories;
     }
-    public static Bitmap getBreakfastPicture() {
-        return breakfast_picture;
-    }
-    public static Bitmap getLunchPicture() {
-        return lunch_picture;
-    }
-    public static Bitmap getDinnerPicture() {
-        return dinner_picture;
-    }
-    public static void setBreakfast(String breakfast_name, float breakfast_calories, Bitmap breakfast_picture) {
+//    public static Bitmap getBreakfastPicture() {
+//        return breakfast_picture;
+//    }
+//    public static Bitmap getLunchPicture() {
+//        return lunch_picture;
+//    }
+//    public static Bitmap getDinnerPicture() {
+//        return dinner_picture;
+//    }
+    public static void setBreakfast(String breakfast_name, float breakfast_calories) {
         Food.breakfast_name = breakfast_name;
         Food.breakfast_calories = breakfast_calories;
-        Food.breakfast_picture = breakfast_picture;
+//        Food.breakfast_picture = breakfast_picture;
     }
-    public static void setLunch(String lunch_name, float lunch_calories, Bitmap lunch_picture) {
+    public static void setLunch(String lunch_name, float lunch_calories) {
         Food.lunch_name = lunch_name;
         Food.lunch_calories = lunch_calories;
-        Food.lunch_picture = lunch_picture;
+//        Food.lunch_picture = lunch_picture;
     }
-    public static void setDinner(String dinner_name, float dinner_calories, Bitmap dinner_picture) {
+    public static void setDinner(String dinner_name, float dinner_calories) {
         Food.dinner_name = dinner_name;
         Food.dinner_calories = dinner_calories;
-        Food.dinner_picture = dinner_picture;
+//        Food.dinner_picture = dinner_picture;
     }
 }

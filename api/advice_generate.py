@@ -13,10 +13,10 @@ def generate_advice(data):
     ・{data['character_traits']}な{data['character_type']}のキャラクターの口調を強調\n\
     ・アドバイス以外の文面は出力しない\n\
     ・絵文字を多用\n\
-    ・2文以内\n\
-    ・80文字以内\n\
+    ・3文以内\n\
+    ・100文字以内\n\
     ・最初に今日の摂取カロリーの上限に関する言及をすること\n\
-    ・食事が空白の場合はそこに関する言及はしないこと\n\
+    ・すでに食べた食事がある場合、バランスを考えて次に食べるべき食事の種類をお勧めすること\n\
     ・摂取カロリーが今日の摂取カロリーの上限を超えている場合は、摂取カロリーに関する言及をすること\n\
     ユーザーの属性：\n\
     ・現在の体重：{data['weight']}kg\n\
@@ -37,7 +37,7 @@ def generate_advice(data):
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt_text}],
         temperature=0.8,
-        max_tokens=160
+        max_tokens=200
     )
     advice = response.choices[0].message["content"]
 
