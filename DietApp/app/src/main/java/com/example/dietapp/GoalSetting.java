@@ -19,7 +19,7 @@ public class GoalSetting extends AppCompatActivity {
     private EditText targetWeightEditText;
     private EditText targetDurationEditText;
     public static Goal goal;
-    public Food food;
+    public static Food food;
 
 
     private Button helloButton;
@@ -37,7 +37,7 @@ public class GoalSetting extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 goal = saveGoalInfo();
-                //food = new Food("","","",0,0,0, "add.png", "add.png", "add.png");
+                food = new Food("","","",0,0,0);
 
                 Intent intent = new Intent(GoalSetting.this, MakeCharacter.class);
                 startActivity(intent);
