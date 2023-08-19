@@ -12,6 +12,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import static com.example.dietapp.MorningPage.currentBitmapMorning;
+import static com.example.dietapp.NightPage.currentBitmapNight;
+import static com.example.dietapp.NoonPage.currentBitmapNoon;
+import static com.example.dietapp.GoalSetting.food;
+import static com.example.dietapp.GoalSetting.food;
+
+
 public class WeightUpdate extends AppCompatActivity {
 
     private EditText weightEditText;
@@ -35,6 +42,10 @@ public class WeightUpdate extends AppCompatActivity {
                     Day += 1;
                     goal.setDay(Day);
                     user.setWeight(weight);  // Userクラスで定義されるsetWeight関数を用いてweightを更新
+                    currentBitmapNight = null;
+                    currentBitmapMorning = null;
+                    currentBitmapNoon = null;
+                    food = new Food("","","",0,0,0);
 
                     // GameTopPage.javaに遷移
                     Intent intent = new Intent(WeightUpdate.this, GameTopPage.class);

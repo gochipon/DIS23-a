@@ -75,7 +75,7 @@
         <!-- GameTopPageに遷移するボタン -->
         <Button
             android:id="@+id/goToMakeCharacterButton"
-            android:text="応援キャラの選択"
+            android:text="ミールメイトの選択"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
