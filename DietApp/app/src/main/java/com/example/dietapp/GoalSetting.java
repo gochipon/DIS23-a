@@ -19,6 +19,7 @@ public class GoalSetting extends AppCompatActivity {
     private EditText targetWeightEditText;
     private EditText targetDurationEditText;
     public static Goal goal;
+    public Food food;
 
 
     private Button helloButton;
@@ -31,20 +32,25 @@ public class GoalSetting extends AppCompatActivity {
 
         targetWeightEditText = findViewById(R.id.targetWeightEditText);
         targetDurationEditText = findViewById(R.id.targetDurationEditText);
-        Button goToGameTopPageButton = findViewById(R.id.goToGameTopPageButton);
-        goToGameTopPageButton.setOnClickListener(new View.OnClickListener() {
+        Button goToMakeCharacter = findViewById(R.id.goToMakeCharacterButton);
+        goToMakeCharacter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                goal = saveGoalInfo();
+                //food = new Food("","","",0,0,0, "add.png", "add.png", "add.png");
 
-                float targetWeight = Float.parseFloat(targetWeightEditText.getText().toString());
-                String targetDuration = targetDurationEditText.getText().toString();
-
-                Goal goal = new Goal(targetWeight, targetDuration);
-
-                Intent intent = new Intent(GoalSetting.this, GameTopPage.class);
+                Intent intent = new Intent(GoalSetting.this, MakeCharacter.class);
                 startActivity(intent);
 
             }
         });
+    }
+    private Goal saveGoalInfo() {
+        float targetWeight = Float.parseFloat(targetWeightEditText.getText().toString());
+        float targetDuration = Float.parseFloat(targetDurationEditText.getText().toString());
+
+        goal = new Goal(targetWeight, targetDuration);
+
+        return goal;
     }
 }

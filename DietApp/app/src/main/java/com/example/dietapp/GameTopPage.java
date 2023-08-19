@@ -1,23 +1,32 @@
 package com.example.dietapp;
 
-import static com.example.dietapp.MainActivity.user;
 import static com.example.dietapp.GoalSetting.goal;
-
+import static com.example.dietapp.MainActivity.user;
+import static com.example.dietapp.MakeCharacter.character;
 import static com.example.dietapp.MorningPage.currentBitmapMorning;
 import static com.example.dietapp.NightPage.currentBitmapNight;
 import static com.example.dietapp.NoonPage.currentBitmapNoon;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import java.io.FileInputStream;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.MediaType;
@@ -25,35 +34,62 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
-import org.json.JSONException;
-import org.json.JSONObject;
-import android.widget.TextView;
-
-import java.io.IOException;
 
 
 public class GameTopPage extends AppCompatActivity {
     private OkHttpClient client = new OkHttpClient();
+    private void displayImage(String imageUrl) {
+        runOnUiThread(() -> {
+            ImageView imageView = findViewById(R.id.testImageView); // 画像を置き換えたいImageViewのID
+            Picasso.get().load(imageUrl).into(imageView);
+        });
+    }
     private void getDietAdvice() {
         String url = "http://10.0.2.2:8080/diet-advice";
 
         // Create JSON payload. You'll have to fetch real values for these.
         MediaType JSON = MediaType.parse("application/json; charset=utf-8");
         JSONObject jsonObject = new JSONObject();
+        float bmr;
+        float tdee;
+        if (user.getGender() == "男性"){
+            bmr = (float) (10*user.getWeight() + (6.25*user.getHeight()) - (5*user.getAge()) + 5);
+        }
+        else{
+            bmr = (float) (10*user.getWeight() + (6.25*user.getHeight()) - (5*user.getAge()) - 161);
+        }
+        if (user.getActivityLevel() == "低い"){
+            tdee = (float) (1.5 * bmr);
+        }
+        else if (user.getActivityLevel() == "普通"){
+            tdee = (float) (1.8 * bmr);
+        }
+        else{
+            tdee = (float) (2.2 * bmr);
+        }
+        float target_calories;
+        float calories_ate;
+        target_calories = 7700 * (goal.getTargetWeight()-user.getWeight()) / (goal.getTargetDuration());
+        calories_ate = Food.getBreakfastCalories() + Food.getLunchCalories() + Food.getDinnerCalories();
+        float difference = target_calories - calories_ate;
+        int progress = (int) ((difference / target_calories) * 100);
+        SeekBar customSeekBar = findViewById(R.id.customSeekBar);
+        customSeekBar.setOnTouchListener((v, event) -> true);
+        customSeekBar.setProgress(progress);
+
         try {
-            jsonObject.put("character_traits", "ミステリアス");
-            jsonObject.put("character_type", "女性");
+            jsonObject.put("character_traits", character.getCharacterTrait());
+            jsonObject.put("character_type", character.getCharacterType());
             jsonObject.put("weight", user.getWeight());
             jsonObject.put("height", user.getHeight());
             jsonObject.put("age", user.getAge());
             jsonObject.put("gender", user.getGender());
-            jsonObject.put("calories_burned", 2000);
-            jsonObject.put("food", "ラーメン");
-            jsonObject.put("calories_ate", 2000);
-            jsonObject.put("target_calories", 1500);
+            jsonObject.put("calories_burned", tdee);
+            jsonObject.put("food", Food.getBreakfastName() + Food.getLunchName() + Food.getDinnerName());
+            jsonObject.put("calories_ate", calories_ate);
+            jsonObject.put("target_calories", target_calories);
             jsonObject.put("target_weight", goal.getTargetWeight());
             jsonObject.put("target_period", goal.getTargetDuration());
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -106,14 +142,19 @@ public class GameTopPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
 
+        //アドバイスを更新
+        getDietAdvice();
+
+        // characterオブジェクトから画像URLを取得して、displayImage関数で画像を置き換えます
+        String imageUrl = character.getImageUrl();
+        displayImage(imageUrl);
+
         // TextViewを参照
         TextView myTextView = findViewById(R.id.usernameTextView);
 
         // TextViewに文字列をセット
         myTextView.setText(user.getUsername());
-        
-        //アドバイスを更新
-        getDietAdvice();
+
         // 各ボタンのリスナーをセット
         morningButton = findViewById(R.id.morningButton);
         morningButton.setOnClickListener(new View.OnClickListener() {

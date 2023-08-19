@@ -1,126 +1,142 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:fillViewport="true">
 
-
-  <TextView
-      android:id="@+id/WeightTextView"
-      android:layout_width="wrap_content"
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:text="Weight: "
-      app:layout_constraintTop_toBottomOf="@id/testImageView"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
+      android:padding="16dp">
 
-  <!-- ユーザー名表示 -->
-  <TextView
-      android:id="@+id/usernameTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="ユーザー名"
-      android:textSize="24sp"
-      android:textStyle="bold"
-      app:layout_constraintTop_toTopOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent" />
+      <!-- ユーザー名表示 -->
+      <TextView
+          android:id="@+id/usernameTextView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="ユーザー名"
+          android:textSize="24sp"
+          android:textStyle="bold"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent" />
 
-  <!-- 中心の画像 -->
-  <ImageView
-      android:id="@+id/testImageView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:src="@drawable/test"
-      app:layout_constraintTop_toBottomOf="@id/usernameTextView"
-      app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintVertical_bias="0.4"
-      android:layout_marginTop="40dp" />
+      <SeekBar
+          android:id="@+id/customSeekBar"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:max="100"
+          android:progress="50"
+          android:thumb="@android:color/transparent"
+          app:layout_constraintTop_toBottomOf="@id/usernameTextView" />
+      <TextView
+          android:id="@+id/customSeekBarLabel"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="残り消費可能カロリー"
+          android:textSize="12sp"
+          app:layout_constraintTop_toBottomOf="@id/customSeekBar"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"/>
 
+      <!-- 吹き出しテキスト -->
+      <TextView
+          android:id="@+id/borderedTextView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="お疲れ様！"
+          android:textSize="16sp"
+          android:background="@drawable/bordered_background"
+          android:padding="5dp"
+          app:layout_constraintTop_toBottomOf="@id/customSeekBarLabel"
+          android:layout_marginTop="8dp"
+          tools:ignore="MissingConstraints" />
 
-  <!-- 吹き出しテキスト -->
-  <TextView
-      android:id="@+id/borderedTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="お疲れ様！"
-      android:textSize="16sp"
-      android:background="@drawable/bordered_background"
-      android:padding="5dp"
-      app:layout_constraintTop_toTopOf="@id/testImageView"
-      app:layout_constraintRight_toRightOf="@id/testImageView"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="@id/testImageView" />
+      <!-- 中心の画像 -->
+      <ImageView
+          android:id="@+id/testImageView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:src="@drawable/test"
+          android:contentDescription="キャラ"
+          app:layout_constraintTop_toBottomOf="@id/borderedTextView"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintVertical_bias="0.4"
+          android:layout_marginTop="4dp"
+          android:layout_marginBottom="4dp" />
 
-  <!-- 朝のボタン -->
-  <Button
-      android:id="@+id/morningButton"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="朝"
-      android:textSize="30sp"
-      android:gravity="center"
-      android:background="@drawable/bordered_background"
-      android:padding="5dp"
-      app:layout_constraintLeft_toLeftOf="parent"
-      app:layout_constraintRight_toLeftOf="@id/noonButton"
-      app:layout_constraintTop_toBottomOf="@id/testImageView" />
+      <!-- 朝のボタン -->
+      <Button
+          android:id="@+id/morningButton"
+          android:layout_width="100dp"
+          android:layout_height="wrap_content"
+          android:text="朝"
+          android:textSize="30sp"
+          android:gravity="center"
+          android:background="@drawable/bordered_background"
+          android:padding="5dp"
+          app:layout_constraintLeft_toLeftOf="parent"
+          app:layout_constraintRight_toLeftOf="@id/noonButton"
+          app:layout_constraintTop_toBottomOf="@id/testImageView" />
 
-  <!-- 朝のImageView -->
-  <ImageView
-      android:id="@+id/morningImageView"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      app:layout_constraintTop_toBottomOf="@id/morningButton"
-      app:layout_constraintLeft_toLeftOf="@id/morningButton"
-      app:layout_constraintRight_toRightOf="@id/morningButton" />
+      <!-- 朝のImageView -->
+      <ImageView
+          android:id="@+id/morningImageView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/morningButton"
+          app:layout_constraintLeft_toLeftOf="@id/morningButton"
+          app:layout_constraintRight_toRightOf="@id/morningButton" />
 
-  <!-- 昼のボタン -->
-  <Button
-      android:id="@+id/noonButton"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="昼"
-      android:textSize="30sp"
-      android:gravity="center"
-      android:background="@drawable/bordered_background"
-      android:padding="5dp"
-      app:layout_constraintLeft_toRightOf="@id/morningButton"
-      app:layout_constraintRight_toLeftOf="@id/nightButton"
-      app:layout_constraintTop_toTopOf="@id/morningButton" />
+      <!-- 昼のボタン -->
+      <Button
+          android:id="@+id/noonButton"
+          android:layout_width="100dp"
+          android:layout_height="wrap_content"
+          android:text="昼"
+          android:textSize="30sp"
+          android:gravity="center"
+          android:background="@drawable/bordered_background"
+          android:padding="5dp"
+          app:layout_constraintLeft_toRightOf="@id/morningButton"
+          app:layout_constraintRight_toLeftOf="@id/nightButton"
+          app:layout_constraintTop_toTopOf="@id/morningButton" />
 
-  <!-- 昼のImageView -->
-  <ImageView
-      android:id="@+id/noonImageView"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      app:layout_constraintTop_toBottomOf="@id/noonButton"
-      app:layout_constraintLeft_toLeftOf="@id/noonButton"
-      app:layout_constraintRight_toRightOf="@id/noonButton" />
+      <!-- 昼のImageView -->
+      <ImageView
+          android:id="@+id/noonImageView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/noonButton"
+          app:layout_constraintLeft_toLeftOf="@id/noonButton"
+          app:layout_constraintRight_toRightOf="@id/noonButton" />
 
-  <!-- 夜のボタン -->
-  <Button
-      android:id="@+id/nightButton"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      android:text="夜"
-      android:textSize="30sp"
-      android:gravity="center"
-      android:background="@drawable/bordered_background"
-      android:padding="5dp"
-      app:layout_constraintLeft_toRightOf="@id/noonButton"
-      app:layout_constraintRight_toRightOf="parent"
-      app:layout_constraintTop_toTopOf="@id/morningButton" />
+      <!-- 夜のボタン -->
+      <Button
+          android:id="@+id/nightButton"
+          android:layout_width="100dp"
+          android:layout_height="wrap_content"
+          android:text="夜"
+          android:textSize="30sp"
+          android:gravity="center"
+          android:background="@drawable/bordered_background"
+          android:padding="5dp"
+          app:layout_constraintLeft_toRightOf="@id/noonButton"
+          app:layout_constraintRight_toRightOf="parent"
+          app:layout_constraintTop_toTopOf="@id/morningButton" />
 
-  <!-- 夜のImageView -->
-  <ImageView
-      android:id="@+id/nightImageView"
-      android:layout_width="0dp"
-      android:layout_height="wrap_content"
-      app:layout_constraintTop_toBottomOf="@id/nightButton"
-      app:layout_constraintLeft_toLeftOf="@id/nightButton"
-      app:layout_constraintRight_toRightOf="@id/nightButton" />
+      <!-- 夜のImageView -->
+      <ImageView
+          android:id="@+id/nightImageView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          app:layout_constraintTop_toBottomOf="@id/nightButton"
+          app:layout_constraintLeft_toLeftOf="@id/nightButton"
+          app:layout_constraintRight_toRightOf="@id/nightButton" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

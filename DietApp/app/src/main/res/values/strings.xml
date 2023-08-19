@@ -14,4 +14,42 @@
     </string-array>
     <string name="button">Button</string>
     <string name="description">camera picture</string>
+
+    <string-array name="character_types">
+        <item>男性</item>
+        <item>女性</item>
+        <item>犬</item>
+        <item>猫</item>
+        <item>ペンギン</item>
+        <item>ウサギ</item>
+        <item>鶴</item>
+        <item>カメ</item>
+        <item>イルカ</item>
+        <item>蝶</item>
+    </string-array>
+
+    <string-array name="character_traits">
+        <item>ポジティブ</item>
+        <item>クール</item>
+        <item>ストイック</item>
+        <item>ユーモラス</item>
+        <item>ミステリアス</item>
+    </string-array>
+
+    <string-array name="character_appearance">
+        <item>髪の色: 黒</item>
+        <item>髪の色: 茶</item>
+        <item>髪の色: 金</item>
+        <item>目の色: 黒</item>
+        <item>目の色: 茶</item>
+        <item>目の色: 青</item>
+        <item>人種: アジア系</item>
+        <item>人種: 白人系</item>
+        <item>人種: 黒人系</item>
+        <item>服装: カジュアル</item>
+        <item>服装: ビジネス</item>
+        <item>服装: 伝統的</item>
+        <item>服装: スポーツ</item>
+    </string-array>
+
 </resources>

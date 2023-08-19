@@ -14,7 +14,7 @@
         android:id="@+id/targetWeightLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="目標体重"
+        android:text="目標体重(kg)"
         android:gravity="start"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -23,9 +23,9 @@
     <!-- 目標体重のEditText -->
     <EditText
         android:id="@+id/targetWeightEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="例：60kg"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:hint="　"
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/targetWeightLabel"
         app:layout_constraintStart_toStartOf="parent"
@@ -37,7 +37,7 @@
         android:id="@+id/targetDurationLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="目標期間"
+        android:text="目標期間(日)"
         android:gravity="start"
         app:layout_constraintTop_toBottomOf="@id/targetWeightEditText"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,9 +47,9 @@
     <!-- 目標期間のEditText -->
     <EditText
         android:id="@+id/targetDurationEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="例：30日"
+        android:layout_width="360dp"
+        android:layout_height="48dp"
+        android:hint="　"
         android:inputType="numberDecimal"
         app:layout_constraintTop_toBottomOf="@id/targetDurationLabel"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,8 +58,8 @@
 
     <!-- GameTopPageに遷移するボタン -->
     <Button
-        android:id="@+id/goToGameTopPageButton"
-        android:layout_width="0dp"
+        android:id="@+id/goToMakeCharacterButton"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:text="ダイエットを始める"
         app:layout_constraintTop_toBottomOf="@id/targetDurationEditText"
