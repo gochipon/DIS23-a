@@ -137,6 +137,21 @@
           app:layout_constraintLeft_toLeftOf="@id/nightButton"
           app:layout_constraintRight_toRightOf="@id/nightButton" />
 
+      <!-- 体重を入力するボタン -->
+      <Button
+          android:id="@+id/weightInputButton"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:text="体重を入力する！"
+          android:textSize="18sp"
+          android:layout_marginTop="16dp"
+          android:background="@drawable/bordered_background"
+          android:padding="5dp"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toBottomOf="@id/nightImageView"
+          app:layout_constraintWidth_percent="0.5"/>
+
   </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>
