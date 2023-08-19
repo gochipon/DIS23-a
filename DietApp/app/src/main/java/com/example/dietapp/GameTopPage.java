@@ -262,7 +262,7 @@ public class GameTopPage extends AppCompatActivity {
         float weightLeft = weight - targetWeight;
 
         // TextViewのテキストを更新
-        String updatedText = String.format(Locale.JAPAN, "Day %d: 目標まであと%.2f kg!", day, weightLeft);
+        String updatedText = String.format(Locale.JAPAN, "Day %d: 目標まであと -%.2f kg!", day, weightLeft);
         dayTextView.setText(updatedText);
     }
 
