@@ -152,6 +152,16 @@ public class GameTopPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
 
+        TextView morningCaloriesTextView = findViewById(R.id.morningCaloriesTextView);
+        morningCaloriesTextView.setText(String.valueOf(Food.getBreakfastCalories()) + " kcal");
+
+        TextView noonCaloriesTextView = findViewById(R.id.noonCaloriesTextView);
+        noonCaloriesTextView.setText(String.valueOf(Food.getLunchCalories()) + " kcal");
+
+        TextView nightCaloriesTextView = findViewById(R.id.nightCaloriesTextView);
+        nightCaloriesTextView.setText(String.valueOf(Food.getDinnerCalories()) + " kcal");
+
+
 
         dayTextView = findViewById(R.id.dayTextView);
 
@@ -188,7 +198,7 @@ public class GameTopPage extends AppCompatActivity {
         testImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getDietAdvice();
+                recreate();
             }
         });
 
