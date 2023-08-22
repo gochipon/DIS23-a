@@ -1,0 +1,38 @@
+<!-- res/layout/custom_dialog_layout.xml -->
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="カスタムポップアップ"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:id="@+id/redButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="赤"
+        android:background="#FF0000" />
+
+    <Button
+        android:id="@+id/whiteButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="白"
+        android:background="#FFFFFF" />
+
+    <Button
+        android:id="@+id/blueButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="青"
+        android:background="#0000FF" />
+</LinearLayout>

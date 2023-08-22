@@ -7,6 +7,7 @@ import static com.example.dietapp.MorningPage.currentBitmapMorning;
 import static com.example.dietapp.NightPage.currentBitmapNight;
 import static com.example.dietapp.NoonPage.currentBitmapNoon;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -18,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
@@ -161,8 +163,6 @@ public class GameTopPage extends AppCompatActivity {
         TextView nightCaloriesTextView = findViewById(R.id.nightCaloriesTextView);
         nightCaloriesTextView.setText(String.valueOf(Food.getDinnerCalories()) + " kcal");
 
-
-
         dayTextView = findViewById(R.id.dayTextView);
 
         updateDayTextView();
@@ -208,7 +208,8 @@ public class GameTopPage extends AppCompatActivity {
         morningButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToMorningPage();
+                showPopupDialog();
+//                goToMorningPage();
             }
         });
 
@@ -260,6 +261,45 @@ public class GameTopPage extends AppCompatActivity {
                 // ここで新しいアクティビティに遷移します。
                 Intent intent = new Intent(GameTopPage.this, Graph.class); // GraphActivityは遷移先のアクティビティ名です。
                 startActivity(intent);
+            }
+        });
+    }
+
+    private void showPopupDialog() {
+        // カスタムダイアログレイアウトを取得
+        View dialogView = getLayoutInflater().inflate(R.layout.custom_dialog_layout, null);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(dialogView);
+        AlertDialog dialog = builder.create();
+        dialog.show();
+
+        // レイアウト内のボタンにクリックリスナーを設定
+        Button redButton = dialogView.findViewById(R.id.redButton);
+        Button whiteButton = dialogView.findViewById(R.id.whiteButton);
+        Button blueButton = dialogView.findViewById(R.id.blueButton);
+
+        redButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // "赤" ボタンがクリックされた際の処理
+                dialog.dismiss(); // ダイアログを閉じる
+            }
+        });
+
+        whiteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // "白" ボタンがクリックされた際の処理
+                dialog.dismiss(); // ダイアログを閉じる
+            }
+        });
+
+        blueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // "青" ボタンがクリックされた際の処理
+                dialog.dismiss(); // ダイアログを閉じる
             }
         });
     }
