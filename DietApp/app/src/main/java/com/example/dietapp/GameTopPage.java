@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.text.SpannableString;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -47,12 +48,12 @@ public class GameTopPage extends AppCompatActivity {
     Button weightInputButton;
     private TextView dayTextView;
 
-    private void displayImage(String imageUrl) {
-        runOnUiThread(() -> {
-            ImageView imageView = findViewById(R.id.testImageView); // 画像を置き換えたいImageViewのID
-            Picasso.get().load(imageUrl).into(imageView);
-        });
-    }
+//    private void displayImage(String imageUrl) {
+//        runOnUiThread(() -> {
+//            ImageView imageView = findViewById(R.id.testImageView); // 画像を置き換えたいImageViewのID
+//            Picasso.get().load(imageUrl).into(imageView);
+//        });
+//    }
     private void getDietAdvice() {
         String url = "http://10.0.2.2:8080/diet-advice";
 
@@ -87,9 +88,9 @@ public class GameTopPage extends AppCompatActivity {
         int progress = (int) ((difference / target_calories) * 100);
         Log.d("debug", "Progress: " + progress + ", Calories Ate: " + calories_ate + ", Target Calories: " + target_calories);
 
-        SeekBar customSeekBar = findViewById(R.id.customSeekBar);
-        customSeekBar.setOnTouchListener((v, event) -> true);
-        customSeekBar.setProgress(progress);
+//        SeekBar customSeekBar = findViewById(R.id.customSeekBar);
+//        customSeekBar.setProgress(progress);
+//        customSeekBar.setOnTouchListener((v, event) -> true);
 
         try {
             jsonObject.put("character_traits", character.getCharacterTrait());
@@ -128,7 +129,7 @@ public class GameTopPage extends AppCompatActivity {
                         String advice = jsonResponse.getString("advice");
                         runOnUiThread(() -> {
                             // Assuming you have a TextView with id `borderedTextView` in your layout
-                            TextView adviceTextView = findViewById(R.id.borderedTextView);
+                            TextView adviceTextView = findViewById(R.id.balloonTextView);
                             adviceTextView.setText(advice);
                         });
                     } catch (JSONException e) {
@@ -156,129 +157,116 @@ public class GameTopPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game_top_page);
 
-        // 背景画像の最大化
-        DisplayMetrics displayMetrics = new DisplayMetrics();
-        getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-        int screenWidth = displayMetrics.widthPixels;
-        int screenHeight = displayMetrics.heightPixels;
-
-        ImageView backGround = findViewById(R.id.backGround);
-
-        Glide.with(this)
-                .load(R.drawable.background)
-                .centerCrop()
-                .override(screenWidth, screenHeight)
-                .into(backGround);
-
-        TextView morningCaloriesTextView = findViewById(R.id.morningCaloriesTextView);
-        morningCaloriesTextView.setText(String.valueOf(Food.getBreakfastCalories()) + " kcal");
-
-        TextView noonCaloriesTextView = findViewById(R.id.noonCaloriesTextView);
-        noonCaloriesTextView.setText(String.valueOf(Food.getLunchCalories()) + " kcal");
-
-        TextView nightCaloriesTextView = findViewById(R.id.nightCaloriesTextView);
-        nightCaloriesTextView.setText(String.valueOf(Food.getDinnerCalories()) + " kcal");
-
-        dayTextView = findViewById(R.id.dayTextView);
-
-        updateDayTextView();
-
-
-        // ButtonをIDを使って取得
-        weightInputButton = findViewById(R.id.weightInputButton);
+//        TextView morningCaloriesTextView = findViewById(R.id.morningCaloriesTextView);
+//        morningCaloriesTextView.setText(String.valueOf(Food.getBreakfastCalories()) + " kcal");
+//
+//        TextView noonCaloriesTextView = findViewById(R.id.noonCaloriesTextView);
+//        noonCaloriesTextView.setText(String.valueOf(Food.getLunchCalories()) + " kcal");
+//
+//        TextView nightCaloriesTextView = findViewById(R.id.nightCaloriesTextView);
+//        nightCaloriesTextView.setText(String.valueOf(Food.getDinnerCalories()) + " kcal");
+//
+//        dayTextView = findViewById(R.id.dayTextView);
+//
+//        updateDayTextView();
+//
+//
+//         ButtonをIDを使って取得
+//        weightInputButton = findViewById(R.id.weightInputButton);
 
         // Buttonのクリックリスナーを設定
-        weightInputButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // WeightUpdateのアクティビティへのインテントを作成
-                Intent intent = new Intent(GameTopPage.this, WeightUpdate.class);
-
-                // アクティビティを開始
-                startActivity(intent);
-            }
-        });
+//        weightInputButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // WeightUpdateのアクティビティへのインテントを作成
+//                Intent intent = new Intent(GameTopPage.this, WeightUpdate.class);
+//
+//                // アクティビティを開始
+//                startActivity(intent);
+//            }
+//        });
 
         // characterオブジェクトから画像URLを取得して、displayImage関数で画像を置き換えます
         String imageUrl = character.getImageUrl();
-        displayImage(imageUrl);
+//        displayImage(imageUrl);
 
         // TextViewを参照
         TextView myTextView = findViewById(R.id.usernameTextView);
+        SpannableString content = new   SpannableString(user.getUsername());
 
         // TextViewに文字列をセット
-        myTextView.setText(user.getUsername());
+        myTextView.setText(content);
 
         getDietAdvice();
-        ImageView testImageView = findViewById(R.id.testImageView);
-        testImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                recreate();
-            }
-        });
+//        ImageView testImageView = findViewById(R.id.testImageView);
+//        testImageView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                recreate();
+//            }
+//        });
 
 
-        // 各ボタンのリスナーをセット
-        morningButton = findViewById(R.id.morningButton);
-        morningButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                showPopupDialog();
-//                goToMorningPage();
-            }
-        });
-
-        noonButton = findViewById(R.id.noonButton);
-        noonButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToNoonPage();
-            }
-        });
-
-        nightButton = findViewById(R.id.nightButton);
-        nightButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                goToNightPage();
-            }
-        });
-        // Load and set the image
-        try {
-            FileInputStream fis = openFileInput("Morning.jpg");
-            Bitmap savedBitmap = BitmapFactory.decodeStream(fis);
-            fis.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String filename = "Morning.jpg";
-        Bitmap loadedImage = loadImageFromInternalStorage(filename);
-
-        ImageView morningImageView = findViewById(R.id.morningImageView);
-        ImageView noonImageView = findViewById(R.id.noonImageView);
-        ImageView nightImageView = findViewById(R.id.nightImageView);
-
-//        morningImageView.setImageBitmap(loadedImage);
-        morningImageView.setImageBitmap(currentBitmapMorning);
-        noonImageView.setImageBitmap(currentBitmapNoon);
-        nightImageView.setImageBitmap(currentBitmapNight);
-
-
-
-//        MorningPage morningPage = new MorningPage();
-//        Bitmap savedImage = morningPage.getSavedImage();
-
-        TextView usernameTextView = findViewById(R.id.usernameTextView);
-        usernameTextView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // ここで新しいアクティビティに遷移します。
-                Intent intent = new Intent(GameTopPage.this, Graph.class); // GraphActivityは遷移先のアクティビティ名です。
-                startActivity(intent);
-            }
-        });
+//        // 各ボタンのリスナーをセット
+//        morningButton = findViewById(R.id.morningButton);
+//        morningButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                showPopupDialog();
+////                goToMorningPage();
+//            }
+//        });
+//
+//        noonButton = findViewById(R.id.noonButton);
+//        noonButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                goToNoonPage();
+//            }
+//        });
+//
+//        nightButton = findViewById(R.id.nightButton);
+//        nightButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                goToNightPage();
+//            }
+//        });
+//        // Load and set the image
+//        try {
+//            FileInputStream fis = openFileInput("Morning.jpg");
+//            Bitmap savedBitmap = BitmapFactory.decodeStream(fis);
+//            fis.close();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        String filename = "Morning.jpg";
+//        Bitmap loadedImage = loadImageFromInternalStorage(filename);
+//
+//        ImageView morningImageView = findViewById(R.id.morningImageView);
+//        ImageView noonImageView = findViewById(R.id.noonImageView);
+//        ImageView nightImageView = findViewById(R.id.nightImageView);
+//
+////        morningImageView.setImageBitmap(loadedImage);
+//        morningImageView.setImageBitmap(currentBitmapMorning);
+//        noonImageView.setImageBitmap(currentBitmapNoon);
+//        nightImageView.setImageBitmap(currentBitmapNight);
+//
+//
+//
+////        MorningPage morningPage = new MorningPage();
+////        Bitmap savedImage = morningPage.getSavedImage();
+//
+//        TextView usernameTextView = findViewById(R.id.usernameTextView);
+//        usernameTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // ここで新しいアクティビティに遷移します。
+//                Intent intent = new Intent(GameTopPage.this, Graph.class); // GraphActivityは遷移先のアクティビティ名です。
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void showPopupDialog() {

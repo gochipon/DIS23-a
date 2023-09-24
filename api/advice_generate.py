@@ -33,6 +33,10 @@ def generate_advice(data):
     ・目標期間：{data['target_period']}日\n\
     アドバイス："
 
+    prompt_text = f"「初めまして、炭次郎さん。私は{data['username']}という者です」\
+    に対する返答文を竈門炭次郎の口調で行ってください。まずは竈門炭次郎さんになりきって自己紹介を一文でし、\
+    今後は{data['username']}の専属のAIコンシェルジュとして総合的なサポートを行うことを伝え、「よろしく」といったような挨拶で締める初対面の返答を行って下さい。"
+
     response = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt_text}],
